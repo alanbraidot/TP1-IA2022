@@ -57,5 +57,13 @@ public class PvzAgentState extends SearchBasedAgentState {
 		return null;
 	}
 
+	public boolean isAgentAlive() {
+		return this.suns>0;
+	}
+
+	public boolean isNoMoreZombies() {
+		return this.zombies==0;
+	}
+
     
 }
