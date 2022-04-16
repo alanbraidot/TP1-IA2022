@@ -14,6 +14,7 @@ public class PvzPerception extends Perception{
     public static int ZOMBIE_TYPE4_PERCEPTION = 3;
     public static int ZOMBIE_TYPE5_PERCEPTION = 2;
     public static int ZOMBIE_TYPE6_PERCEPTION = 4;
+    public static int SUNFLOWER_PERCEPTION = 10;
     
     private int leftSensor;
     private int topSensor;
@@ -34,5 +35,43 @@ public class PvzPerception extends Perception{
 		// TODO Auto-generated method stub
 		
 	}
-    
+	
+	public int getLeftSensor() {
+		return leftSensor;
+	}
+
+	public void setLeftSensor(int leftSensor) {
+		this.leftSensor = leftSensor;
+	}
+
+	public int getTopSensor() {
+		return topSensor;
+	}
+
+	public void setTopSensor(int topSensor) {
+		this.topSensor = topSensor;
+	}
+
+	public int getRightSensor() {
+		return rightSensor;
+	}
+
+	public void setRightSensor(int rightSensor) {
+		this.rightSensor = rightSensor;
+	}
+
+	public int getBottomSensor() {
+		return bottomSensor;
+	}
+
+	public void setBottomSensor(int bottomSensor) {
+		this.bottomSensor = bottomSensor;
+	}
+
+	@Override
+	public String toString() {
+		return "PvzPerception [leftSensor=" + leftSensor + ", topSensor=" + topSensor + ", rightSensor=" + rightSensor
+				+ ", bottomSensor=" + bottomSensor + "]";
+	}
+	
 }
