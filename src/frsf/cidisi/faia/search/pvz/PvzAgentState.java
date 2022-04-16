@@ -1,5 +1,8 @@
 package frsf.cidisi.faia.search.pvz;
 
+import frsf.cidisi.faia.agent.Perception;
+import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+
 public class PvzAgentState extends SearchBasedAgentState {
 
     private int[] position;
@@ -29,6 +32,30 @@ public class PvzAgentState extends SearchBasedAgentState {
     public void initState(){
         
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public SearchBasedAgentState clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateState(Perception p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     
 }
