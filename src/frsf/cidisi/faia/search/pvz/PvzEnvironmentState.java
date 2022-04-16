@@ -4,7 +4,6 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class PvzEnvironmentState extends EnvironmentState{
 	
-	public int test = 0;
 
 	@Override
 	public void initState() {
