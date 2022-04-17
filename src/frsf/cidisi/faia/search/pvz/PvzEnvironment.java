@@ -1,5 +1,7 @@
 package frsf.cidisi.faia.search.pvz;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
@@ -35,10 +37,10 @@ public class PvzEnvironment extends Environment{
         int col = this.getEnvironmentState().getAgentPosition()[1];
 
         // Set the perception sensors
-        perception.setTopSensor(this.getTopCell(row, col));
-        perception.setLeftSensor(this.getLeftCell(row, col));
-        perception.setRightSensor(this.getRightCell(row, col));
-        perception.setBottomSensor(this.getBottomCell(row, col));
+        perception.setTopSensor(this.getTopColumn(row, col));
+        perception.setLeftSensor(this.getLeftRow(row, col));
+        perception.setRightSensor(this.getRightRow(row, col));
+        perception.setBottomSensor(this.getBottomColumn(row, col));
 
         // Return the perception
         return perception;
@@ -52,39 +54,38 @@ public class PvzEnvironment extends Environment{
     @Override
     public boolean agentFailed(Action actionReturned) {
 
-        PacmanEnvironmentState pacmanEnvironmentState =
+        PvzEnvironmentState pvzEnvironmentState =
                 this.getEnvironmentState();
 
-        int agentEnergy = pacmanEnvironmentState.getAgentEnergy();
+        int agentSuns = pvzEnvironmentState.getAgentSuns();
 
-        // FIXME: The pacman agent always has the same energy
-        // If the agent has no energy, he failed
-        if (agentEnergy <= 0)
+       
+        // If the agent has no suns, he failed
+        if (agentSuns <= 0)
             return true;
 
         return false;
     }
 
-    // The following methods are Pacman-specific:
-    
-    public int getTopCell(int row, int col) {
-        return ((PacmanEnvironmentState) this.environmentState)
-                .getTopCell(row, col);
+   
+    public ArrayList<Integer> getTopColumn(int row, int col) {
+        return ((PvzEnvironmentState) this.environmentState)
+                .getTopColumn(row, col);
     }
 
-    public int getLeftCell(int row, int col) {
-        return ((PacmanEnvironmentState) this.environmentState)
-                .getLeftCell(row, col);
+    public ArrayList<Integer> getLeftRow(int row, int col) {
+        return ((PvzEnvironmentState) this.environmentState)
+                .getLeftRow(row, col);
     }
 
-    public int getRightCell(int row, int col) {
-        return ((PacmanEnvironmentState) this.environmentState)
-                .getRightCell(row, col);
+    public ArrayList<Integer> getRightRow(int row, int col) {
+        return ((PvzEnvironmentState) this.environmentState)
+                .getRightRow(row, col);
     }
 
-    public int getBottomCell(int row, int col) {
-        return ((PacmanEnvironmentState) this.environmentState)
-                .getBottomCell(row, col);
+    public ArrayList<Integer> getBottomColumn(int row, int col) {
+        return ((PvzEnvironmentState) this.environmentState)
+                .getBottomColumn(row, col);
     }
     
 }

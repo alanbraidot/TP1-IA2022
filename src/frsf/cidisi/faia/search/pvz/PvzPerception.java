@@ -1,8 +1,13 @@
 package frsf.cidisi.faia.search.pvz;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.examples.search.pacman.PacmanAgent;
+import frsf.cidisi.faia.examples.search.pacman.PacmanEnvironment;
+import frsf.cidisi.faia.examples.search.pacman.PacmanEnvironmentState;
 
 public class PvzPerception extends Perception{
 	
@@ -16,13 +21,14 @@ public class PvzPerception extends Perception{
     public static int ZOMBIE_TYPE6_PERCEPTION = 4;
     public static int SUNFLOWER_PERCEPTION = 10;
     
-    private int leftSensor;
-    private int topSensor;
-    private int rightSensor;
-    private int bottomSensor;
+    private ArrayList<Integer> leftSensor;
+    private ArrayList<Integer> topSensor;
+    private ArrayList<Integer> rightSensor;
+    private ArrayList<Integer> bottomSensor;
+    private int Suns;
     
     public PvzPerception() {
-    	
+    	Suns = 20;
     }
     
     public PvzPerception(Agent agent, Environment environment) {
@@ -30,41 +36,55 @@ public class PvzPerception extends Perception{
     }
 	
 
-	@Override
-	public void initPerception(Agent agent, Environment environment) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public int getLeftSensor() {
+    /**
+     * This method is used to setup the perception.
+     */
+    @Override
+    public void initPerception(Agent agent, Environment environment) {
+        PvzAgent pvzAgent = (PvzAgent) agent;
+        PvzEnvironment pvzEnvironment = (PvzEnvironment) environment;
+        PvzEnvironmentState environmentState =
+                pvzEnvironment.getEnvironmentState();
+
+        int row = environmentState.getAgentPosition()[0];
+        int col = environmentState.getAgentPosition()[1];
+
+        this.setTopSensor(pvzEnvironment.getTopColumn(row, col));
+        this.setLeftSensor(pvzEnvironment.getLeftRow(row, col));
+        this.setRightSensor(pvzEnvironment.getRightRow(row, col));
+        this.setBottomSensor(pvzEnvironment.getBottomColumn(row, col));
+    }
+
+
+	public ArrayList<Integer> getLeftSensor() {
 		return leftSensor;
 	}
 
-	public void setLeftSensor(int leftSensor) {
+	public void setLeftSensor(ArrayList<Integer> leftSensor) {
 		this.leftSensor = leftSensor;
 	}
 
-	public int getTopSensor() {
+	public ArrayList<Integer> getTopSensor() {
 		return topSensor;
 	}
 
-	public void setTopSensor(int topSensor) {
+	public void setTopSensor(ArrayList<Integer> topSensor) {
 		this.topSensor = topSensor;
 	}
 
-	public int getRightSensor() {
+	public ArrayList<Integer> getRightSensor() {
 		return rightSensor;
 	}
 
-	public void setRightSensor(int rightSensor) {
+	public void setRightSensor(ArrayList<Integer> rightSensor) {
 		this.rightSensor = rightSensor;
 	}
 
-	public int getBottomSensor() {
+	public ArrayList<Integer> getBottomSensor() {
 		return bottomSensor;
 	}
 
-	public void setBottomSensor(int bottomSensor) {
+	public void setBottomSensor(ArrayList<Integer> bottomSensor) {
 		this.bottomSensor = bottomSensor;
 	}
 
