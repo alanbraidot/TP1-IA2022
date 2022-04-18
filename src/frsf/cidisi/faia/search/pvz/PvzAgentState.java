@@ -143,6 +143,10 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public boolean isNoMoreZombies() {
 		return this.zombies==0;
 	}
+	
+	public boolean isZombie(int perception) {
+		return (perception>=1 && perception<=5);
+	}
 
 	public int getRowPosition() {
 		return this.position[0];

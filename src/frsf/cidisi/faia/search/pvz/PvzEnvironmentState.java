@@ -203,4 +203,8 @@ public ArrayList<Integer> getBottomColumn(int row, int col) {
 	public int getGardenPosition(int row, int col) {
 		return this.garden[row][col];
 	}
+
+	public boolean isZombie(int perception) {
+		return (perception>=1 && perception<=5);
+	}
 }

@@ -9,7 +9,7 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
-import frsf.cidisi.faia.search.pvz.actions.Fight;
+import frsf.cidisi.faia.search.pvz.actions.FightUp;
 import frsf.cidisi.faia.search.pvz.actions.GoDown;
 import frsf.cidisi.faia.search.pvz.actions.GoLeft;
 import frsf.cidisi.faia.search.pvz.actions.GoRight;
@@ -34,7 +34,7 @@ public class PvzAgent extends SearchBasedAgent{
         Vector<SearchAction> operators = new Vector<SearchAction>();
         operators.addElement(new Plant());
         operators.addElement(new Harvest());
-        operators.addElement(new Fight());
+        operators.addElement(new FightUp());
         operators.addElement(new GoLeft());
         operators.addElement(new GoUp());
         operators.addElement(new GoRight());
