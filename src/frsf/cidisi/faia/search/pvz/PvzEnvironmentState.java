@@ -26,13 +26,13 @@ public class PvzEnvironmentState extends EnvironmentState{
 
         /* Sets a cell at the back with a zombie. */
         
-        //IMPORTANT. This needs randomizing
+        //TODO IMPORTANT. This needs randomizing
         garden[8][4] = 5;
       
 
         this.setAgentPosition(new int[]{0, 2});
         
-      //IMPORTANT. This needs randomizing
+      //TODO IMPORTANT. This needs randomizing
         this.setAgentSuns(15);
     }
 
@@ -61,7 +61,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 	
 public ArrayList<Integer> getTopColumn(int row, int col) {
 		
-		ArrayList<Integer> topColumn = new ArrayList(); //Creating new arrayList to return data
+		ArrayList<Integer> topColumn = new ArrayList<Integer>(); //Creating new arrayList to return data
 		
 		if (row==0) {
 			return topColumn; // if I'm on the first row and I want to perceive the environment towards the north I won't see a damn thing, thus I will return an Empty arraylist
@@ -89,7 +89,7 @@ public ArrayList<Integer> getTopColumn(int row, int col) {
 
 public ArrayList<Integer> getRightRow(int row, int col) {
 		
-		ArrayList<Integer> rightRow = new ArrayList(); 
+		ArrayList<Integer> rightRow = new ArrayList<Integer>(); 
 		
 		if (col==8) {
 			return rightRow; 
@@ -119,7 +119,7 @@ public ArrayList<Integer> getRightRow(int row, int col) {
 
 public ArrayList<Integer> getLeftRow(int row, int col) {
 	
-	ArrayList<Integer> leftRow = new ArrayList(); 
+	ArrayList<Integer> leftRow = new ArrayList<Integer>(); 
 	
 	if (col==8) {
 		return leftRow; 

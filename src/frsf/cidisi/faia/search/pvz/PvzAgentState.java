@@ -2,6 +2,7 @@ package frsf.cidisi.faia.search.pvz;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+import java.util.Random;
 
 public class PvzAgentState extends SearchBasedAgentState {
 
@@ -26,12 +27,15 @@ public class PvzAgentState extends SearchBasedAgentState {
         this.garden = new int[5][9];
         position = new int[2];
         suns=0;
+        zombies=0;
         this.initState();
     }
 
     @Override
     public void initState(){
-        
+        //The number of suns and zombies is randomly generated. Format: ...nextInt(max + min) + min;
+    	this.suns = new Random().nextInt(20 + 2) + 2;
+    	this.zombies = new Random().nextInt(20 + 5) + 5;
     }
 
 	@Override
