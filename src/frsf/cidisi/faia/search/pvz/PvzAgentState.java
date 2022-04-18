@@ -69,7 +69,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	@Override
 	public SearchBasedAgentState clone() {
-        int[][] newGarden = new int[4][4];
+        int[][] newGarden = new int[5][9];
 
         for (int row = 0; row < garden.length; row++) {
             for (int col = 0; col < garden.length; col++) {

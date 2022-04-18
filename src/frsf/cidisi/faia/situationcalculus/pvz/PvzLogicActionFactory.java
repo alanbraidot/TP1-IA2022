@@ -13,8 +13,7 @@ public class PvzLogicActionFactory extends ActionFactory{
 
 	@Override
 	protected String endActionString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "noAction";
 	}
 
 }

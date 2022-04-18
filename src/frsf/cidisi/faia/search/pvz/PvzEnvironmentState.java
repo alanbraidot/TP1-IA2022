@@ -27,7 +27,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         /* Sets a cell at the back with a zombie. */
         
         //TODO IMPORTANT. This needs randomizing
-        garden[8][4] = 5;
+        garden[4][8] = 5;
       
 
         this.setAgentPosition(new int[]{0, 2});
