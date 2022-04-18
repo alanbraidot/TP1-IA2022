@@ -2,7 +2,6 @@ package frsf.cidisi.faia.search.pvz;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
-import frsf.cidisi.faia.examples.search.pacman.PacmanAgentState;
 
 public class PvzAgentState extends SearchBasedAgentState {
 
@@ -144,9 +143,29 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public boolean isNoMoreZombies() {
 		return this.zombies==0;
 	}
-	
-	
-	
 
+	public int getRowPosition() {
+		return this.position[0];
+	}
+
+	public int getColumnPosition() {
+		return this.position[1];
+	}
+
+	public void setRowPosition(int row) {
+		this.position[0] = row;
+	}
+	
+	public void setColumnPosition(int col) {
+		this.position[1] = col;
+	}
+
+	public void setGardenPosition(int row, int col, int perception) {
+		this.garden[row][col] = perception;
+	}
+
+	public int getGardenPosition(int row, int col) {
+		return this.garden[row][col];
+	}
     
 }

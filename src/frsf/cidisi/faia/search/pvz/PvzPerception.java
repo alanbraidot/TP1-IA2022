@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
-import frsf.cidisi.faia.examples.search.pacman.PacmanAgent;
-import frsf.cidisi.faia.examples.search.pacman.PacmanEnvironment;
-import frsf.cidisi.faia.examples.search.pacman.PacmanEnvironmentState;
 
 public class PvzPerception extends Perception{
 	
@@ -25,10 +22,10 @@ public class PvzPerception extends Perception{
     private ArrayList<Integer> topSensor;
     private ArrayList<Integer> rightSensor;
     private ArrayList<Integer> bottomSensor;
-    private int Suns;
+    private int suns;
     
     public PvzPerception() {
-    	Suns = 20;
+    	this.suns = 20;
     }
     
     public PvzPerception(Agent agent, Environment environment) {

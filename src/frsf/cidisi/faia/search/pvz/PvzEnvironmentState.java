@@ -172,27 +172,35 @@ public ArrayList<Integer> getBottomColumn(int row, int col) {
     }
 	
 	
-public int[][] getGarden() {
-	return garden;
-}
+	public int[][] getGarden() {
+		return garden;
+	}
+	
+	public void setGarden(int[][] garden) {
+		this.garden = garden;
+	}
+	
+	public int[] getAgentPosition() {
+		return agentPosition;
+	}
+	
+	public void setAgentPosition(int[] agentPosition) {
+		this.agentPosition = agentPosition;
+	}
+	
+	public int getAgentSuns() {
+		return agentSuns;
+	}
+	
+	public void setAgentSuns(int agentSuns) {
+		this.agentSuns = agentSuns;
+	}
 
-public void setGarden(int[][] garden) {
-	this.garden = garden;
-}
-
-public int[] getAgentPosition() {
-	return agentPosition;
-}
-
-public void setAgentPosition(int[] agentPosition) {
-	this.agentPosition = agentPosition;
-}
-
-public int getAgentSuns() {
-	return agentSuns;
-}
-
-public void setAgentSuns(int agentSuns) {
-	this.agentSuns = agentSuns;
-}
+	public void setGardenPosition(int row, int col, int perception) {
+		this.garden[row][col] = perception;
+	}
+	
+	public int getGardenPosition(int row, int col) {
+		return this.garden[row][col];
+	}
 }
