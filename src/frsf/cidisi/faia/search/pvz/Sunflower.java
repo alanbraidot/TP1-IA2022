@@ -18,6 +18,10 @@ public class Sunflower {
 	public void setSuns(int suns) {
 		this.suns = suns;
 	}
+	
+	public void increaseSuns(int suns) {
+		this.suns += suns;
+	}
 
 	public int[] getPosition() {
 		return position;

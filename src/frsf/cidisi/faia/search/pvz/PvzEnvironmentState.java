@@ -6,6 +6,9 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class PvzEnvironmentState extends EnvironmentState{
 	
+	public static int MATRIX_ROW_LENGHT = 5;
+	public static int MATRIX_COLUMN_LENGHT = 10;
+	
 	private int[][] garden;
     private int[] agentPosition; //Represents the current position of the agent
     private int agentSuns; //Represents the soles owned by the agent
@@ -18,7 +21,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     /**
      * This method is used to setup the initial real world.
      */
-    @Override
+	@Override
     public void initState() {
     	
         this.agentSuns = 15; //TODO Randomizing
@@ -31,8 +34,8 @@ public class PvzEnvironmentState extends EnvironmentState{
     	}
 
         // Sets all cells as empty
-        for (int row = 0; row < garden.length; row++) {
-            for (int col = 0; col < garden.length; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
                 garden[row][col] = PvzPerception.EMPTY_PERCEPTION; //Fill the array as unknown.
             }
         }
@@ -55,7 +58,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     }
 
     public PvzEnvironmentState() {
-        this.garden = new int[5][9];
+        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
         this.zombies = new ArrayList<>();
         this.sunflowers = new ArrayList<>();
         this.houseAttacked = false;
@@ -102,7 +105,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return rightRow; 
 		}
 		
-        for (int i = col; i<=8; i++) { 
+        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGHT; i++) { 
    
         	rightRow.add(garden[row][i]);
         	
@@ -150,7 +153,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return bottomColumn; 
 		}
 		
-        for (int i = row; i<=4; i++) { 
+        for (int i = row; i<PvzEnvironmentState.MATRIX_ROW_LENGHT; i++) { 
    
         	bottomColumn.add(garden[i][col]);
         	
@@ -242,6 +245,14 @@ public class PvzEnvironmentState extends EnvironmentState{
 	}
 
 	public boolean isZombie(int perception) {
-		return (perception>=1 && perception<=5);
+		return (perception>=PvzPerception.ZOMBIE_TYPE3_PERCEPTION && perception<= PvzPerception.ZOMBIE_TYPE1_PERCEPTION);
+	}
+
+	public boolean isSunflower(int perception) {
+		return (perception >= PvzPerception.SUNFLOWER_PERCEPTION);
+	}
+
+	public boolean isAgentPosition(int row, int col) {
+		return (this.agentPosition[0] == row && this.agentPosition[1] == col);
 	}
 }

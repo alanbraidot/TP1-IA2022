@@ -56,5 +56,9 @@ public class Zombie {
 	public void setColumnPosition(int col) {
 		this.position[1] = col;
 	}
+	
+	public void decreaseColumn() {
+		this.position[1]--;
+	}
 
 }

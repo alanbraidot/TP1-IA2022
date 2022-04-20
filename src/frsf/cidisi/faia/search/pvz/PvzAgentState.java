@@ -20,7 +20,7 @@ public class PvzAgentState extends SearchBasedAgentState {
     }
 
     public PvzAgentState(){
-        this.garden = new int[5][9];
+        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
         position = new int[2];
         suns=0;
         zombies=0;
@@ -44,8 +44,8 @@ public class PvzAgentState extends SearchBasedAgentState {
         int sunsObj = ((PvzAgentState) obj).getSuns();
         int zombiesObj = ((PvzAgentState) obj).getZombies();
 
-        for (int row = 0; row < garden.length; row++) {
-            for (int col = 0; col < garden.length; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
                 if (garden[row][col] != gardenObj[row][col]) {
                     return false;
                 }
@@ -65,10 +65,10 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	@Override
 	public SearchBasedAgentState clone() {
-        int[][] newGarden = new int[5][9];
+        int[][] newGarden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
 
-        for (int row = 0; row < garden.length; row++) {
-            for (int col = 0; col < garden.length; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
                 newGarden[row][col] = garden[row][col];
             }
         }
@@ -137,7 +137,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 	}
 	
 	public boolean isZombie(int perception) {
-		return (perception>=1 && perception<=5);
+		return (perception>=PvzPerception.ZOMBIE_TYPE3_PERCEPTION && perception<=PvzPerception.ZOMBIE_TYPE1_PERCEPTION);
 	}
 
 	public int getRowPosition() {
