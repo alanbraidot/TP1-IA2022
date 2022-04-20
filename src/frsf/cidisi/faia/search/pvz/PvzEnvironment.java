@@ -53,16 +53,16 @@ public class PvzEnvironment extends Environment{
 
     private void uptadeZombies(PvzEnvironmentState environmentState) {
     	
-		for(Zombie z : environmentState.getZombies()) {
-			
-			//Zombies can only spawn in the column farthest from the house. Free rows are searched
-			ArrayList<Integer> freeRows = new ArrayList<>();
-			for(int i=0; i<PvzEnvironmentState.MATRIX_ROW_LENGHT; i++) {
-				if(environmentState.getGardenPosition(i, PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) == PvzPerception.EMPTY_PERCEPTION) {
-					freeRows.add(i);
-				}
+    	//Zombies can only spawn in the column farthest from the house. Free rows are searched
+		ArrayList<Integer> freeRows = new ArrayList<>();
+		for(int i=0; i<PvzEnvironmentState.MATRIX_ROW_LENGHT; i++) {
+			if(environmentState.getGardenPosition(i, PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) == PvzPerception.EMPTY_PERCEPTION) {
+				freeRows.add(i);
 			}
-			
+		}
+    	
+    	for(Zombie z : environmentState.getZombies()) {
+
 			//It is verified that the zombie does not exist and there are free rows
 			if(z.getPosition() == null && freeRows.size()>0){
 				
