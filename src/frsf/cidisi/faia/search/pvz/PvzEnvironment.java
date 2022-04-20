@@ -81,7 +81,7 @@ public class PvzEnvironment extends Environment{
                 .getRightRow(row, col);
     }
 
-    public ArrayList<Integer> getBottomColumn(int row, int col) {
+    public ArrayList<Integer> getBottomColumn(int row, int col) { 
         return ((PvzEnvironmentState) this.environmentState)
                 .getBottomColumn(row, col);
     }

@@ -7,8 +7,11 @@ import frsf.cidisi.faia.state.EnvironmentState;
 public class PvzEnvironmentState extends EnvironmentState{
 	
 	private int[][] garden;
-    private int[] agentPosition;
-    private int agentSuns;
+    private int[] agentPosition; //Represents the current position of the agent
+    private int agentSuns; //Represents the soles owned by the agent
+    private int remainingZombies; //Represents the number of zombies that are in play or remain to appear.
+    private ArrayList<Zombie> zombies; //Represents the list of zombies that exist or will exist in the game
+    private ArrayList<Sunflower> sunflowers; //Represents the list of sunflowers that exist or will exist in the game
 	
 
     /**
@@ -16,24 +19,29 @@ public class PvzEnvironmentState extends EnvironmentState{
      */
     @Override
     public void initState() {
+    	
+        this.agentSuns = 15; //TODO Randomizing
+        this.remainingZombies = 10; //TODO Randomizing
+    	
+    	// Randomly generate the zombies
+    	
+    	for(int i=1; i <= remainingZombies; i++) {
+    		zombies.add(new Zombie());
+    	}
 
         // Sets all cells as empty
         for (int row = 0; row < garden.length; row++) {
             for (int col = 0; col < garden.length; col++) {
-                garden[row][col] = 0; //0 is the number corresponding to an empty cell
+                garden[row][col] = PvzPerception.EMPTY_PERCEPTION; //Fill the array as unknown.
             }
         }
 
         /* Sets a cell at the back with a zombie. */
         
         //TODO IMPORTANT. This needs randomizing
-        garden[4][8] = 5;
-      
+        //garden[4][8] = 5;
 
         this.setAgentPosition(new int[]{0, 2});
-        
-      //TODO IMPORTANT. This needs randomizing
-        this.setAgentSuns(15);
     }
 
     /**
@@ -41,12 +49,14 @@ public class PvzEnvironmentState extends EnvironmentState{
      */
     
     
-    public PvzEnvironmentState(int[][] m) {
-        garden = m;
+    public PvzEnvironmentState(int[][] g) {
+        garden = g;
     }
 
     public PvzEnvironmentState() {
-        garden = new int[5][9];
+        this.garden = new int[5][9];
+        this.zombies = new ArrayList<>();
+        this.sunflowers = new ArrayList<>();
         this.initState();
     }
     
@@ -59,7 +69,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     }
     
 	
-public ArrayList<Integer> getTopColumn(int row, int col) {
+    public ArrayList<Integer> getTopColumn(int row, int col) {
 		
 		ArrayList<Integer> topColumn = new ArrayList<Integer>(); //Creating new arrayList to return data
 		
@@ -68,26 +78,21 @@ public ArrayList<Integer> getTopColumn(int row, int col) {
 		}
 		
         for (int i = row; i>=0; i--) {   //I perceive the environment on a column northwards until I hit the garden top wall
-   
+        	
         	topColumn.add(garden[i][col]); //I add to my return array each element I see
-        	if(garden[i][col]!=0) { //As the rules of the game state it, the plant perception can only reach the first object it sees on any direction, be it a zombie or a sunflower, therefore, if I hit something, after adding it, I will stop perceiving beyond
+        	
+        	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { //As the rules of the game state it, the plant perception can only reach the first object it sees on any direction, be it a zombie or a sunflower, therefore, if I hit something, after adding it, I will stop perceiving beyond
         		
         		while(topColumn.size()<row) { //the length of the arraylist to return needs to be the same length as the row I'm being fed as a parameter
-        			topColumn.add(-1);//and as everything beyond the first obstacle is unknown, i need to set it to -1, as per our own game definitions
+        			topColumn.add(PvzPerception.UNKNOWN_PERCEPTION); //and as everything beyond the first obstacle is unknown, i need to set it to -1, as per our own game definitions
         		}
-        	
-        		return topColumn;   
+        		return topColumn;
+        	}
         }
- 
-        return topColumn; 
-        }
-		return topColumn;
-        
-        
-        
+		return topColumn;   
     }
 
-public ArrayList<Integer> getRightRow(int row, int col) {
+    public ArrayList<Integer> getRightRow(int row, int col) {
 		
 		ArrayList<Integer> rightRow = new ArrayList<Integer>(); 
 		
@@ -97,57 +102,47 @@ public ArrayList<Integer> getRightRow(int row, int col) {
 		
         for (int i = col; i<=8; i++) { 
    
-        	rightRow.add(garden[row][i]); 
-        	if(garden[row][i]!=0) { 
+        	rightRow.add(garden[row][i]);
+        	
+        	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
         		
         		while(rightRow.size()<(8-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
-        			rightRow.add(-1);
+        			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
-        	
-        		return rightRow;   
-        }
- 
-        return rightRow; 
+        		return rightRow;
+        	}
         }
 		return rightRow;
-       
     }
 
-
-
-
-
-public ArrayList<Integer> getLeftRow(int row, int col) {
+    public ArrayList<Integer> getLeftRow(int row, int col) {
 	
-	ArrayList<Integer> leftRow = new ArrayList<Integer>(); 
-	
-	if (col==8) {
-		return leftRow; 
-	}
-	
-    for (int i = col; i>=0; i--) { 
-
-    	leftRow.add(garden[row][i]); 
-    	if(garden[row][i]!=0) { 
-    		
-    		while(leftRow.size()<col) { 
-    			leftRow.add(-1);
-    		}
-    	
-    		return leftRow;   
-    }
-
-    return leftRow; 
-    }
-	return leftRow;
-    
-}
-
-    
-
-public ArrayList<Integer> getBottomColumn(int row, int col) {
+		ArrayList<Integer> leftRow = new ArrayList<Integer>(); 
 		
-		ArrayList<Integer> bottomColumn = new ArrayList(); 
+		if (col==8) {
+			return leftRow; 
+		}
+		
+	    for (int i = col; i>=0; i--) { 
+	
+	    	leftRow.add(garden[row][i]);
+	    	
+	    	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) {
+	    		
+	    		while(leftRow.size()<col) { 
+	    			leftRow.add(PvzPerception.UNKNOWN_PERCEPTION);
+	    		}
+	    		return leftRow;   
+	    	}
+	    }
+		return leftRow;
+	}
+
+    
+
+    public ArrayList<Integer> getBottomColumn(int row, int col) {
+		
+		ArrayList<Integer> bottomColumn = new ArrayList<Integer>(); 
 		
 		if (row==4) {
 			return bottomColumn; 
@@ -155,22 +150,30 @@ public ArrayList<Integer> getBottomColumn(int row, int col) {
 		
         for (int i = row; i<=4; i++) { 
    
-        	bottomColumn.add(garden[i][col]); 
-        	if(garden[i][col]!=0) { 
+        	bottomColumn.add(garden[i][col]);
+        	
+        	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { 
         		
         		while(bottomColumn.size()<(4-row)) { 
-        			bottomColumn.add(-1);
+        			bottomColumn.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
-        	
-        		return bottomColumn;   
+        		return bottomColumn;
+        	}
         }
- 
-        return bottomColumn; 
-        }
-		return bottomColumn;
-        
+		return bottomColumn; 
     }
 	
+    public void plantSunflower() {
+    	this.sunflowers.add(new Sunflower(this.agentPosition));
+    	int row = agentPosition[0];
+    	int col = agentPosition[1];
+    	this.garden[row][col] = PvzPerception.SUNFLOWER_PERCEPTION;
+    }
+    
+    public void killZombie(int row, int col) {
+    	this.zombies.removeIf(z -> z.getColumnPosition()==col && z.getRowPosition()==row);
+    	this.garden[row][col] = PvzPerception.EMPTY_PERCEPTION;
+    }
 	
 	public int[][] getGarden() {
 		return garden;
@@ -202,6 +205,14 @@ public ArrayList<Integer> getBottomColumn(int row, int col) {
 	
 	public int getGardenPosition(int row, int col) {
 		return this.garden[row][col];
+	}
+
+	public ArrayList<Zombie> getZombies() {
+		return zombies;
+	}
+
+	public void setZombies(ArrayList<Zombie> zombies) {
+		this.zombies = zombies;
 	}
 
 	public boolean isZombie(int perception) {

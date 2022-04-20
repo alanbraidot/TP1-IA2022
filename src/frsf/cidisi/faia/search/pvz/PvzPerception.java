@@ -8,24 +8,22 @@ import frsf.cidisi.faia.environment.Environment;
 
 public class PvzPerception extends Perception{
 	
-	public static int UNKNOWN_PERCEPTION = -1;
-    public static int EMPTY_PERCEPTION = 0;
-    public static int ZOMBIE_TYPE1_PERCEPTION = 1;
-    public static int ZOMBIE_TYPE2_PERCEPTION = 2;
-    public static int ZOMBIE_TYPE3_PERCEPTION = 5;
-    public static int ZOMBIE_TYPE4_PERCEPTION = 3;
-    public static int ZOMBIE_TYPE5_PERCEPTION = 2;
-    public static int ZOMBIE_TYPE6_PERCEPTION = 4;
-    public static int SUNFLOWER_PERCEPTION = 10;
+	public static int UNKNOWN_PERCEPTION = -20;
+    public static int EMPTY_PERCEPTION = -10;
+    public static int ZOMBIE_TYPE1_PERCEPTION = -1;
+    public static int ZOMBIE_TYPE2_PERCEPTION = -2;
+    public static int ZOMBIE_TYPE3_PERCEPTION = -5;
+    public static int ZOMBIE_TYPE4_PERCEPTION = -3;
+    public static int ZOMBIE_TYPE5_PERCEPTION = -2;
+    public static int ZOMBIE_TYPE6_PERCEPTION = -4;
+    public static int SUNFLOWER_PERCEPTION = 0;
     
     private ArrayList<Integer> leftSensor;
     private ArrayList<Integer> topSensor;
     private ArrayList<Integer> rightSensor;
     private ArrayList<Integer> bottomSensor;
-    private int suns;
     
     public PvzPerception() {
-    	this.suns = 20;
     }
     
     public PvzPerception(Agent agent, Environment environment) {
@@ -40,8 +38,7 @@ public class PvzPerception extends Perception{
     public void initPerception(Agent agent, Environment environment) {
         PvzAgent pvzAgent = (PvzAgent) agent;
         PvzEnvironment pvzEnvironment = (PvzEnvironment) environment;
-        PvzEnvironmentState environmentState =
-                pvzEnvironment.getEnvironmentState();
+        PvzEnvironmentState environmentState = pvzEnvironment.getEnvironmentState();
 
         int row = environmentState.getAgentPosition()[0];
         int col = environmentState.getAgentPosition()[1];

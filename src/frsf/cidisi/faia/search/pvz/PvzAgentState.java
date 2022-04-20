@@ -10,15 +10,11 @@ public class PvzAgentState extends SearchBasedAgentState {
     private int suns;
     private int zombies;
     private int[][] garden;
-    private int[] initialPosition;
 
 
     public PvzAgentState(int row, int col, int suns, int zombies, int[][] g){
         this.garden = g;
         this.position = new int[] {row, col};
-        this.initialPosition = new int[2];
-        this.initialPosition[0] = row;
-        this.initialPosition[1] = col;
         this.suns = suns;
         this.zombies = zombies;
     }
@@ -124,14 +120,6 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	public void setGarden(int[][] garden) {
 		this.garden = garden;
-	}
-
-	public int[] getInitialPosition() {
-		return initialPosition;
-	}
-
-	public void setInitialPosition(int[] initialPosition) {
-		this.initialPosition = initialPosition;
 	}
 
 	@Override
