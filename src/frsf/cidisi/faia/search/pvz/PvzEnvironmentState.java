@@ -10,6 +10,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     private int[] agentPosition; //Represents the current position of the agent
     private int agentSuns; //Represents the soles owned by the agent
     private int remainingZombies; //Represents the number of zombies that are in play or remain to appear.
+    private boolean houseAttacked; //It represents the state of the house. If true, a zombie came to her
     private ArrayList<Zombie> zombies; //Represents the list of zombies that exist or will exist in the game
     private ArrayList<Sunflower> sunflowers; //Represents the list of sunflowers that exist or will exist in the game
 	
@@ -57,6 +58,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         this.garden = new int[5][9];
         this.zombies = new ArrayList<>();
         this.sunflowers = new ArrayList<>();
+        this.houseAttacked = false;
         this.initState();
     }
     
@@ -209,6 +211,30 @@ public class PvzEnvironmentState extends EnvironmentState{
 
 	public ArrayList<Zombie> getZombies() {
 		return zombies;
+	}
+
+	public int getRemainingZombies() {
+		return remainingZombies;
+	}
+
+	public void setRemainingZombies(int remainingZombies) {
+		this.remainingZombies = remainingZombies;
+	}
+
+	public boolean getHouseAttacked() {
+		return houseAttacked;
+	}
+
+	public void setHouseAttacked(boolean houseAtacked) {
+		this.houseAttacked = houseAtacked;
+	}
+
+	public ArrayList<Sunflower> getSunflowers() {
+		return sunflowers;
+	}
+
+	public void setSunflowers(ArrayList<Sunflower> sunflowers) {
+		this.sunflowers = sunflowers;
 	}
 
 	public void setZombies(ArrayList<Zombie> zombies) {

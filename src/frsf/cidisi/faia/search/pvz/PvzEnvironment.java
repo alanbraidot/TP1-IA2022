@@ -56,10 +56,11 @@ public class PvzEnvironment extends Environment{
                 this.getEnvironmentState();
 
         int agentSuns = pvzEnvironmentState.getAgentSuns();
+        boolean houseAttacked = pvzEnvironmentState.getHouseAttacked();
 
        
         // If the agent has no suns, he failed
-        if (agentSuns <= 0)
+        if (agentSuns <= 0 || houseAttacked)
             return true;
 
         return false;
