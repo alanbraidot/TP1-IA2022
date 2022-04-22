@@ -215,5 +215,9 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public int getGardenPosition(int row, int col) {
 		return this.garden[row][col];
 	}
+
+	public void decreaseZombies() {
+		this.zombies--;
+	}
     
 }

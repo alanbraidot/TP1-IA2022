@@ -266,4 +266,8 @@ public class PvzEnvironmentState extends EnvironmentState{
 	public boolean isAgentPosition(int row, int col) {
 		return (this.agentPosition[0] == row && this.agentPosition[1] == col);
 	}
+
+	public void decreaseRemainingZombies() {
+		this.remainingZombies--;
+	}
 }

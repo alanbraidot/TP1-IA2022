@@ -28,6 +28,7 @@ public class FightDown extends SearchAction{
 				
 				pvzState.setSuns(pvzState.getSuns() - perception);
 				pvzState.setGardenPosition(row+1, col, PvzPerception.EMPTY_PERCEPTION);
+				pvzState.decreaseZombies();
 				
 				return pvzState;
 			}
@@ -58,11 +59,14 @@ public class FightDown extends SearchAction{
 				
 				environmentState.setAgentSuns(environmentState.getAgentSuns() - perception);
 				environmentState.setGardenPosition(row+1, col, PvzPerception.EMPTY_PERCEPTION);
+				environmentState.decreaseRemainingZombies();
+				environmentState.killZombie(row+1, col);
 				
 				/*The amount of soles of the plant is updated with the value stored by the state of the environment
 				 *to prevent the agent from manipulating said value at his convenience.*/
 				pvzState.setSuns(environmentState.getAgentSuns());
 				pvzState.setGardenPosition(row+1, col, PvzPerception.EMPTY_PERCEPTION);
+				pvzState.setZombies(environmentState.getRemainingZombies());
 				
 				return environmentState;
 			}

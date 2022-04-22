@@ -27,12 +27,14 @@ public class GoDown extends SearchAction{
 			if(newPerception > PvzPerception.SUNFLOWER_PERCEPTION) {
 				pvzState.setSuns(pvzState.getSuns() + newPerception);
 				pvzState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
+				pvzState.decreaseZombies();
 			}
 			
 			//If a zombie exists in the new cell, the number of suns on the plant is decreased by twice the zombie's life and the zombie dies.
 			if(pvzState.isZombie(newPerception)) {
 				pvzState.setSuns(pvzState.getSuns() + (newPerception*2)); //The operator + is used since the life of the zombie is represented with negative numbers
 				pvzState.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
+				pvzState.decreaseZombies();
 			}
 			
 			return pvzState;
@@ -74,6 +76,8 @@ public class GoDown extends SearchAction{
 			if(environmentState.isZombie(newPerception)) {
 				environmentState.setAgentSuns(environmentState.getAgentSuns() + (newPerception*2)); //The operator + is used since the life of the zombie is represented with negative numbers
 				environmentState.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
+				environmentState.decreaseRemainingZombies();
+				environmentState.killZombie(row, col);
 			}
 			
 			return environmentState;
