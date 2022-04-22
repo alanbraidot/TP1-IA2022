@@ -31,7 +31,7 @@ public class PvzEnvironment extends Environment{
     	//Before perceiving, the state of the environment is updated. New suns are generated, zombies move and others appear.
     	PvzEnvironmentState environmentState = this.getEnvironmentState();
     	updateSunflowers(environmentState);
-    	uptadeZombies(environmentState);
+    	updateZombies(environmentState);
     	
         // Create a new perception to return
         PvzPerception perception = new PvzPerception();
@@ -51,7 +51,7 @@ public class PvzEnvironment extends Environment{
         return perception;
     }
 
-    private void uptadeZombies(PvzEnvironmentState environmentState) {
+    private void updateZombies(PvzEnvironmentState environmentState) {
     	
     	//Zombies can only spawn in the column farthest from the house. Free rows are searched
 		ArrayList<Integer> freeRows = new ArrayList<>();
