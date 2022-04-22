@@ -15,7 +15,7 @@ public class GoRight extends SearchAction{
 		
 		int col = pvzState.getColumnPosition();
 		
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
 				col = col + 1;
 				pvzState.setColumnPosition(col);
 				return pvzState;
@@ -40,7 +40,7 @@ public class GoRight extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
 			col = col + 1;
 			pvzState.setColumnPosition(col);
 			environmentState.setAgentPosition(new int[] {row, col});

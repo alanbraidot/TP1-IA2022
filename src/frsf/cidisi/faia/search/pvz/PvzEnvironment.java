@@ -55,8 +55,8 @@ public class PvzEnvironment extends Environment{
     	
     	//Zombies can only spawn in the column farthest from the house. Free rows are searched
 		ArrayList<Integer> freeRows = new ArrayList<>();
-		for(int i=0; i<PvzEnvironmentState.MATRIX_ROW_LENGHT; i++) {
-			if(environmentState.getGardenPosition(i, PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) == PvzPerception.EMPTY_PERCEPTION) {
+		for(int i=0; i<PvzEnvironmentState.MATRIX_ROW_LENGTH; i++) {
+			if(environmentState.getGardenPosition(i, PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) == PvzPerception.EMPTY_PERCEPTION) {
 				freeRows.add(i);
 			}
 		}
@@ -69,7 +69,7 @@ public class PvzEnvironment extends Environment{
 				//Randomizing appear
 				if((new Random().nextInt(10 + 0) + 0) < 2){ //20% chance to appear
 					
-					int[] position = new int[] {freeRows.get(0), PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1};
+					int[] position = new int[] {freeRows.get(0), PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1};
 					z.setPosition(position); //The new position is assigned
 					environmentState.setGardenPosition(z.getRowPosition(), z.getColumnPosition(), z.getType()); //The matrix is updated
 					freeRows.remove(0); //The row is deleted as free

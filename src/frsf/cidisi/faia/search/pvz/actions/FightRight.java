@@ -19,7 +19,7 @@ public class FightRight extends SearchAction{
 		
 		/* The 'FightUp' action can be selected only if there is an zombie
 		 * in the right position. Otherwise return 'null'. */
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
 			
 			//Absolute value is applied since in the matrix the zombies appear with negative numbers
 			int perception = Math.abs(pvzState.getGardenPosition(row, col+1));
@@ -49,7 +49,7 @@ public class FightRight extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
 			
 			//Absolute value is applied since in the matrix the zombies appear with negative numbers
 			int perception = Math.abs(environmentState.getGardenPosition(row, col+1));

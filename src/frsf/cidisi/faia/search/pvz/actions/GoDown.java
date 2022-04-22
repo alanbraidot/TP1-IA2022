@@ -15,7 +15,7 @@ public class GoDown extends SearchAction{
 		
 		int row = pvzState.getRowPosition();
 		
-		if(row < PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
 			row = row + 1;
 			pvzState.setRowPosition(row);
 			return pvzState;
@@ -40,7 +40,7 @@ public class GoDown extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(row < PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
 				row = row + 1;
 				pvzState.setRowPosition(row);
 				environmentState.setAgentPosition(new int[] {row, col});

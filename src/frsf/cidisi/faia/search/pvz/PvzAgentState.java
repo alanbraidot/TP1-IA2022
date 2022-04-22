@@ -22,7 +22,7 @@ public class PvzAgentState extends SearchBasedAgentState {
     }
 
     public PvzAgentState(){
-        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
+        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGTH][PvzEnvironmentState.MATRIX_COLUMN_LENGTH];
         position = new int[2];
         suns=0;
         zombies=0;
@@ -34,8 +34,8 @@ public class PvzAgentState extends SearchBasedAgentState {
     	//The starting position, suns and zombies are assigned in the agent constructor since the data is provided by the environment.
     	
     	// Sets all cells as unknown
-        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
-            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
                 garden[row][col] = PvzPerception.UNKNOWN_PERCEPTION; //Fill the array as unknown.
             }
         }
@@ -51,8 +51,8 @@ public class PvzAgentState extends SearchBasedAgentState {
         int sunsObj = ((PvzAgentState) obj).getSuns();
         int zombiesObj = ((PvzAgentState) obj).getZombies();
 
-        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
-            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
                 if (garden[row][col] != gardenObj[row][col]) {
                     return false;
                 }
@@ -72,10 +72,10 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	@Override
 	public SearchBasedAgentState clone() {
-        int[][] newGarden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
+        int[][] newGarden = new int[PvzEnvironmentState.MATRIX_ROW_LENGTH][PvzEnvironmentState.MATRIX_COLUMN_LENGTH];
 
-        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
-            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
                 newGarden[row][col] = garden[row][col];
             }
         }

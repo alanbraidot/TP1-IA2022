@@ -7,8 +7,8 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class PvzEnvironmentState extends EnvironmentState{
 	
-	public static int MATRIX_ROW_LENGHT = 5;
-	public static int MATRIX_COLUMN_LENGHT = 10;
+	public static int MATRIX_ROW_LENGTH = 5;
+	public static int MATRIX_COLUMN_LENGTH = 10;
 	
 	private int[][] garden;
     private int[] agentPosition; //Represents the current position of the agent
@@ -37,8 +37,8 @@ public class PvzEnvironmentState extends EnvironmentState{
     	}
 
         // Sets all cells as empty
-        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
-            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
                 garden[row][col] = PvzPerception.EMPTY_PERCEPTION; //Fill the array as unknown.
             }
         }
@@ -51,7 +51,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     }
 
     public PvzEnvironmentState() {
-        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGHT][PvzEnvironmentState.MATRIX_COLUMN_LENGHT];
+        this.garden = new int[PvzEnvironmentState.MATRIX_ROW_LENGTH][PvzEnvironmentState.MATRIX_COLUMN_LENGTH];
         this.zombies = new ArrayList<>();
         this.sunflowers = new ArrayList<>();
         this.houseAttacked = false;
@@ -94,17 +94,17 @@ public class PvzEnvironmentState extends EnvironmentState{
 		
 		ArrayList<Integer> rightRow = new ArrayList<Integer>(); 
 		
-		if (col == PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+		if (col == PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
 			return rightRow; 
 		}
 		
-        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGHT; i++) { 
+        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
    
         	rightRow.add(garden[row][i]);
         	
         	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
         		
-        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
+        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
         			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
         		return rightRow;
@@ -142,17 +142,17 @@ public class PvzEnvironmentState extends EnvironmentState{
 		
 		ArrayList<Integer> bottomColumn = new ArrayList<Integer>(); 
 		
-		if (row == PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
+		if (row == PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
 			return bottomColumn; 
 		}
 		
-        for (int i = row; i<PvzEnvironmentState.MATRIX_ROW_LENGHT; i++) { 
+        for (int i = row; i<PvzEnvironmentState.MATRIX_ROW_LENGTH; i++) { 
    
         	bottomColumn.add(garden[i][col]);
         	
         	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { 
         		
-        		while(bottomColumn.size()<(PvzEnvironmentState.MATRIX_ROW_LENGHT-1-row)) { 
+        		while(bottomColumn.size()<(PvzEnvironmentState.MATRIX_ROW_LENGTH-1-row)) { 
         			bottomColumn.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
         		return bottomColumn;
