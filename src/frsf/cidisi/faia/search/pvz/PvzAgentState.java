@@ -29,9 +29,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 
     @Override
     public void initState(){
-        //The number of suns and zombies is randomly generated. Format: ...nextInt(max + min) + min;
-    	this.suns = new Random().nextInt(20 + 2) + 2;
-    	this.zombies = new Random().nextInt(20 + 5) + 5;
+    	//The starting position, suns and zombies are assigned in the agent constructor since the data is provided by the environment.
     }
 
 	@Override

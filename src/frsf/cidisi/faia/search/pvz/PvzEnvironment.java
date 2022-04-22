@@ -136,7 +136,7 @@ public class PvzEnvironment extends Environment{
 
        
         // If the agent has no suns, he failed
-        if (agentSuns <= 0 || houseAttacked)
+        if (agentSuns < 1 || houseAttacked)
             return true;
 
         return false;

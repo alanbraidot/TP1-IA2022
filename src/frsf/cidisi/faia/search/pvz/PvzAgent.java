@@ -25,12 +25,21 @@ import frsf.cidisi.faia.solver.search.Search;
 public class PvzAgent extends SearchBasedAgent{
     
     public PvzAgent(){
+    }
 
+	public PvzAgent(int[] agentPosition, int agentSuns, int remainingZombies) {
+		
         //The Pvz Goal
         PvzGoal goal = new PvzGoal();
 
         //The Pvz Agent State
         PvzAgentState pvzState = new PvzAgentState();
+        
+        //The starting position, suns and zombies are assigned.
+        pvzState.setPosition(agentPosition);
+        pvzState.setSuns(agentSuns);
+        pvzState.setZombies(remainingZombies);
+        
         this.setAgentState(pvzState);
 
         //Create the operators
@@ -49,7 +58,7 @@ public class PvzAgent extends SearchBasedAgent{
         // Create the Problem
         Problem problem = new Problem(goal, pvzState, operators);
         this.setProblem(problem);
-    }
+	}
 
 	@Override
 	public void see(Perception p) {
