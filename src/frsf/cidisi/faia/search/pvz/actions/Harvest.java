@@ -3,6 +3,7 @@ package frsf.cidisi.faia.search.pvz.actions;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.search.pvz.PvzAgentState;
+import frsf.cidisi.faia.search.pvz.PvzPerception;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
@@ -15,7 +16,7 @@ public class Harvest extends SearchAction{
 		int col = pvzState.getColumnPosition();
 		int row = pvzState.getRowPosition();
 		
-		if(pvzState.getGardenPosition(row, col) > 10) {
+		if(pvzState.getGardenPosition(row, col) > PvzPerception.SUNFLOWER_PERCEPTION) {
 			
 		}
 		return null;

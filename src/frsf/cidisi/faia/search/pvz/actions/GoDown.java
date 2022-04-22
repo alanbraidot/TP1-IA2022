@@ -15,14 +15,16 @@ public class GoDown extends SearchAction{
 		
 		int row = pvzState.getRowPosition();
 		
-		if(row > 0)
-				row = row - 1;
-		else
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
+			row = row + 1;
+			pvzState.setRowPosition(row);
+			return pvzState;
+		}
+		else {
 			//TODO Throw exception
-			
-		pvzState.setRowPosition(row);
+		}
 		
-		return pvzState;
+		return null;
 	}
 
 	@Override
@@ -38,16 +40,17 @@ public class GoDown extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(row > 0)
-				row = row - 1;
-		else
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
+				row = row + 1;
+				pvzState.setRowPosition(row);
+				environmentState.setAgentPosition(new int[] {row, col});
+				return environmentState;
+		}
+		else {
 			//TODO Throw exception
-			
-		pvzState.setRowPosition(row);
+		}
 		
-		environmentState.setAgentPosition(new int[] {row, col});
-		
-		return environmentState;
+		return null;
 	}
 
 	@Override

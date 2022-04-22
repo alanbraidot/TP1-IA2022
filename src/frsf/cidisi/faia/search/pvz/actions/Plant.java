@@ -17,10 +17,15 @@ public class Plant extends SearchAction{
 		int col = pvzState.getColumnPosition();
 		int row = pvzState.getRowPosition();
 		
-		if(pvzState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION) {
+		if(pvzState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION && pvzState.getSuns() > 1) {
+			pvzState.setSuns(pvzState.getSuns() - 1);
 			pvzState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
 			return pvzState;
 		}
+		else {
+			//TODO Throw exception
+		}
+		
 		return null;
 	}
 
@@ -37,11 +42,16 @@ public class Plant extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(environmentState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION) {
+		if(environmentState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION && environmentState.getAgentSuns() > 1) {
 			environmentState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
 			pvzState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
 			
+			environmentState.setAgentSuns(environmentState.getAgentSuns() - 1);
+			pvzState.setSuns(environmentState.getAgentSuns());
 			return environmentState;
+		}
+		else {
+			//TODO Throw exception
 		}
 		
 		return null;

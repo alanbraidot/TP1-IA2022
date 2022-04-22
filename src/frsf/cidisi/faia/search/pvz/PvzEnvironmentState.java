@@ -1,6 +1,7 @@
 package frsf.cidisi.faia.search.pvz;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import frsf.cidisi.faia.state.EnvironmentState;
 
@@ -24,11 +25,13 @@ public class PvzEnvironmentState extends EnvironmentState{
 	@Override
     public void initState() {
     	
-        this.agentSuns = 15; //TODO Randomizing
-        this.remainingZombies = 10; //TODO Randomizing
+		//TODO Uncomment this.agentSuns = new Random().nextInt(20 + 2) + 2)
+        this.agentSuns = 15;
+        
+        //TODO Uncomment this.remainginZombies = new Random().nextInt(20 + 5) + 5)
+        this.remainingZombies = 10;
     	
     	// Randomly generate the zombies
-    	
     	for(int i=1; i <= remainingZombies; i++) {
     		zombies.add(new Zombie());
     	}
@@ -40,18 +43,8 @@ public class PvzEnvironmentState extends EnvironmentState{
             }
         }
 
-        /* Sets a cell at the back with a zombie. */
-        
-        //TODO IMPORTANT. This needs randomizing
-        //garden[4][8] = 5;
-
-        this.setAgentPosition(new int[]{0, 2});
+        this.setAgentPosition(new int[]{1, 2});
     }
-
-    /**
-     * String representation of the real world state.
-     */
-    
     
     public PvzEnvironmentState(int[][] g) {
         garden = g;
@@ -101,7 +94,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 		
 		ArrayList<Integer> rightRow = new ArrayList<Integer>(); 
 		
-		if (col==8) {
+		if (col == PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
 			return rightRow; 
 		}
 		
@@ -111,7 +104,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         	
         	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
         		
-        		while(rightRow.size()<(8-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
+        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
         			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
         		return rightRow;
@@ -124,11 +117,11 @@ public class PvzEnvironmentState extends EnvironmentState{
 	
 		ArrayList<Integer> leftRow = new ArrayList<Integer>(); 
 		
-		if (col==8) {
+		if (col == 1) {
 			return leftRow; 
 		}
 		
-	    for (int i = col; i>=0; i--) { 
+	    for (int i = col; i>0; i--) { 
 	
 	    	leftRow.add(garden[row][i]);
 	    	
@@ -149,7 +142,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 		
 		ArrayList<Integer> bottomColumn = new ArrayList<Integer>(); 
 		
-		if (row==4) {
+		if (row == PvzEnvironmentState.MATRIX_ROW_LENGHT-1) {
 			return bottomColumn; 
 		}
 		
@@ -159,7 +152,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         	
         	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { 
         		
-        		while(bottomColumn.size()<(4-row)) { 
+        		while(bottomColumn.size()<(PvzEnvironmentState.MATRIX_ROW_LENGHT-1-row)) { 
         			bottomColumn.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
         		return bottomColumn;
@@ -245,7 +238,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 	}
 
 	public boolean isZombie(int perception) {
-		return (perception>=PvzPerception.ZOMBIE_TYPE3_PERCEPTION && perception<= PvzPerception.ZOMBIE_TYPE1_PERCEPTION);
+		return (perception >= PvzPerception.ZOMBIE_TYPE3_PERCEPTION && perception <= PvzPerception.ZOMBIE_TYPE1_PERCEPTION);
 	}
 
 	public boolean isSunflower(int perception) {

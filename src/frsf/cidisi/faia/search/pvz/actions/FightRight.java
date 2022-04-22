@@ -19,8 +19,10 @@ public class FightRight extends SearchAction{
 		
 		/* The 'FightUp' action can be selected only if there is an zombie
 		 * in the right position. Otherwise return 'null'. */
-		if(col < 8) {
-			int perception = pvzState.getGardenPosition(row, col+1);
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+			
+			//Absolute value is applied since in the matrix the zombies appear with negative numbers
+			int perception = Math.abs(pvzState.getGardenPosition(row, col+1));
 			
 			if(pvzState.isZombie(perception) && pvzState.getSuns() > perception){
 				
@@ -47,14 +49,19 @@ public class FightRight extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(col < 8) {
-			int perception = environmentState.getGardenPosition(row, col+1);
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT-1) {
+			
+			//Absolute value is applied since in the matrix the zombies appear with negative numbers
+			int perception = Math.abs(environmentState.getGardenPosition(row, col+1));
 			
 			if(environmentState.isZombie(perception) && environmentState.getAgentSuns() > perception){
 				
-				environmentState.setAgentSuns(pvzState.getSuns() - perception);
+				environmentState.setAgentSuns(environmentState.getAgentSuns() - perception);
 				environmentState.setGardenPosition(row, col+1, PvzPerception.EMPTY_PERCEPTION);
 				
+				/*The amount of soles of the plant is updated with the value stored by the state of the environment
+				 *to prevent the agent from manipulating said value at his convenience.*/
+				pvzState.setSuns(environmentState.getAgentSuns());
 				pvzState.setGardenPosition(row, col+1, PvzPerception.EMPTY_PERCEPTION);
 				
 				return environmentState;

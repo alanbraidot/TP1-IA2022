@@ -15,14 +15,16 @@ public class GoLeft extends SearchAction{
 		
 		int col = pvzState.getColumnPosition();
 		
-		if(col > 0)
+		if(col > 1){ //It is queried that it is greater than 1 since column 0 is the house
 				col = col - 1;
-		else
+				pvzState.setColumnPosition(col);
+				return pvzState;
+		}
+		else {
 			//TODO Throw exception
-			
-		pvzState.setColumnPosition(col);
+		}
 		
-		return pvzState;
+		return null;
 	}
 
 	@Override
@@ -38,16 +40,17 @@ public class GoLeft extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(col > 0)
+		if(col > 1) { //It is queried that it is greater than 1 since column 0 is the house
 			col = col - 1;
-		else
+			pvzState.setColumnPosition(col);
+			environmentState.setAgentPosition(new int[] {row, col});
+			return environmentState;
+		}
+		else {
 			//TODO Throw exception
-			
-		pvzState.setColumnPosition(col);
-		
-		environmentState.setAgentPosition(new int[] {row, col});
-		
-		return environmentState;
+		}	
+
+		return null;
 	}
 
 	@Override
