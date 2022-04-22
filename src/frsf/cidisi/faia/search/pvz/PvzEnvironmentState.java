@@ -43,7 +43,7 @@ public class PvzEnvironmentState extends EnvironmentState{
             }
         }
 
-        this.setAgentPosition(new int[]{1, 2});
+        this.setAgentPosition(new int[]{2, 1});
     }
     
     public PvzEnvironmentState(int[][] g) {
@@ -75,7 +75,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return topColumn; // if I'm on the first row and I want to perceive the environment towards the north I won't see a damn thing, thus I will return an Empty arraylist
 		}
 		
-        for (int i = row; i>=0; i--) {   //I perceive the environment on a column northwards until I hit the garden top wall
+        for (int i=row; i>=0; i--) {   //I perceive the environment on a column northwards until I hit the garden top wall
         	
         	topColumn.add(garden[i][col]); //I add to my return array each element I see
         	

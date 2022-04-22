@@ -2,6 +2,8 @@ package frsf.cidisi.faia.search.pvz;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+
+import java.util.Iterator;
 import java.util.Random;
 
 public class PvzAgentState extends SearchBasedAgentState {
@@ -30,6 +32,13 @@ public class PvzAgentState extends SearchBasedAgentState {
     @Override
     public void initState(){
     	//The starting position, suns and zombies are assigned in the agent constructor since the data is provided by the environment.
+    	
+    	// Sets all cells as unknown
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGHT; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGHT; col++) {
+                garden[row][col] = PvzPerception.UNKNOWN_PERCEPTION; //Fill the array as unknown.
+            }
+        }
     }
 
 	@Override
@@ -84,8 +93,30 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	@Override
 	public void updateState(Perception p) {
-		// TODO Auto-generated method stub
+		PvzPerception perception = (PvzPerception) p;
 		
+		int row = this.getRowPosition();
+		int col = this.getColumnPosition();
+		
+		//The garden is updated upwards.
+		for(int i=0; i<perception.getTopSensor().size(); i++) {
+			garden[row-i][col] = perception.getTopSensor().get(i);
+		}
+		
+		//The garden is updated downwards.
+		for(int i=0; i<perception.getBottomSensor().size(); i++) {
+			garden[row+i][col] = perception.getBottomSensor().get(i);
+		}
+		
+		//The garden is updated to the right.
+		for(int i=0; i<perception.getRightSensor().size(); i++) {
+			garden[row][col+i] = perception.getRightSensor().get(i);
+		}
+		
+		//The garden is updated to the left.
+		for(int i=0; i<perception.getLeftSensor().size(); i++) {
+			garden[row][col-i] = perception.getLeftSensor().get(i);
+		}
 	}
 
 	public int[] getPosition() {
