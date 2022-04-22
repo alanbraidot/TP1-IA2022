@@ -27,7 +27,7 @@ public class PvzAgent extends SearchBasedAgent{
     public PvzAgent(){
     }
 
-	public PvzAgent(int[] agentPosition, int agentSuns, int remainingZombies) {
+	public PvzAgent(int[] agentPosition, int agentSuns, int remainingZombies, int zombiesAlive) {
 		
         //The Pvz Goal
         PvzGoal goal = new PvzGoal();
@@ -39,6 +39,7 @@ public class PvzAgent extends SearchBasedAgent{
         pvzState.setPosition(agentPosition);
         pvzState.setSuns(agentSuns);
         pvzState.setZombies(remainingZombies);
+        pvzState.setZombiesAlive(zombiesAlive);
         
         this.setAgentState(pvzState);
 

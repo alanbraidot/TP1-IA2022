@@ -9,7 +9,10 @@ public class PvzSearchMain {
 		
 		PvzEnvironment pvzEnvironment = new PvzEnvironment();
 		
-		PvzAgent pvzAgent = new PvzAgent(pvzEnvironment.getEnvironmentState().getAgentPosition(), pvzEnvironment.getEnvironmentState().getAgentSuns(), pvzEnvironment.getEnvironmentState().getRemainingZombies());
+		PvzAgent pvzAgent = new PvzAgent(pvzEnvironment.getEnvironmentState().getAgentPosition(),
+										pvzEnvironment.getEnvironmentState().getAgentSuns(),
+										pvzEnvironment.getEnvironmentState().getRemainingZombies(),
+										pvzEnvironment.getEnvironmentState().getZombiesAlive());
 		
 		SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(pvzEnvironment, pvzAgent);
 		simulator.start();

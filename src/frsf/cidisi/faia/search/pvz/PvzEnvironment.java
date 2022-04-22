@@ -46,6 +46,7 @@ public class PvzEnvironment extends Environment{
         perception.setLeftSensor(this.getLeftRow(row, col));
         perception.setRightSensor(this.getRightRow(row, col));
         perception.setBottomSensor(this.getBottomColumn(row, col));
+        perception.setZombiesAlive(this.getEnvironmentState().getZombiesAlive());
 
         // Return the perception
         return perception;
@@ -109,6 +110,9 @@ public class PvzEnvironment extends Environment{
 				}
 			}
 		}
+    	
+    	//The number of zombies alive is updated.
+    	environmentState.calculateZombiesAlive();
 	}
 
 	private void updateSunflowers(PvzEnvironmentState environmentState) {

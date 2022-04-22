@@ -2,6 +2,7 @@ package frsf.cidisi.faia.search.pvz;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import frsf.cidisi.faia.state.EnvironmentState;
 
@@ -14,6 +15,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     private int[] agentPosition; //Represents the current position of the agent
     private int agentSuns; //Represents the soles owned by the agent
     private int remainingZombies; //Represents the number of zombies that are in play or remain to appear.
+    private int zombiesAlive; //Represents the number of zombies that are currently alive
     private boolean houseAttacked; //It represents the state of the house. If true, a zombie came to her
     private ArrayList<Zombie> zombies; //Represents the list of zombies that exist or will exist in the game
     private ArrayList<Sunflower> sunflowers; //Represents the list of sunflowers that exist or will exist in the game
@@ -30,6 +32,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         
         //TODO Uncomment this.remainginZombies = new Random().nextInt(20 + 5) + 5)
         this.remainingZombies = 10;
+    	this.zombiesAlive = 0;
     	
     	// Randomly generate the zombies
     	for(int i=1; i <= remainingZombies; i++) {
@@ -66,6 +69,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 		str = str + " AgentPosition=\"(" + getAgentPosition()[0] + "," + "" + getAgentPosition()[1] + ")\"\n";
 		str = str + " AgentSuns=\"" + agentSuns + "\"\n";
 		str = str + " RemainingZombies=\"" + remainingZombies + "\"\n";
+		str = str + " ZombiesAlive=\"" + zombiesAlive + "\"\n";
 		str = str + " HouseAttacked=\"" + houseAttacked + "\"\n";
 		str = str + " Garden= \n";
 		
@@ -98,10 +102,6 @@ public class PvzEnvironmentState extends EnvironmentState{
         	topColumn.add(garden[i][col]); //I add to my return array each element I see
         	
         	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { //As the rules of the game state it, the plant perception can only reach the first object it sees on any direction, be it a zombie or a sunflower, therefore, if I hit something, after adding it, I will stop perceiving beyond
-        		
-        		while(topColumn.size()<row) { //the length of the arraylist to return needs to be the same length as the row I'm being fed as a parameter
-        			topColumn.add(PvzPerception.UNKNOWN_PERCEPTION); //and as everything beyond the first obstacle is unknown, i need to set it to -1, as per our own game definitions
-        		}
         		return topColumn;
         	}
         }
@@ -121,10 +121,6 @@ public class PvzEnvironmentState extends EnvironmentState{
         	rightRow.add(garden[row][i]);
         	
         	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
-        		
-        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
-        			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
-        		}
         		return rightRow;
         	}
         }
@@ -144,10 +140,6 @@ public class PvzEnvironmentState extends EnvironmentState{
 	    	leftRow.add(garden[row][i]);
 	    	
 	    	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) {
-	    		
-	    		while(leftRow.size()<col) { 
-	    			leftRow.add(PvzPerception.UNKNOWN_PERCEPTION);
-	    		}
 	    		return leftRow;   
 	    	}
 	    }
@@ -169,10 +161,6 @@ public class PvzEnvironmentState extends EnvironmentState{
         	bottomColumn.add(garden[i][col]);
         	
         	if(garden[i][col] != PvzPerception.EMPTY_PERCEPTION) { 
-        		
-        		while(bottomColumn.size()<(PvzEnvironmentState.MATRIX_ROW_LENGTH-1-row)) { 
-        			bottomColumn.add(PvzPerception.UNKNOWN_PERCEPTION);
-        		}
         		return bottomColumn;
         	}
         }
@@ -234,6 +222,18 @@ public class PvzEnvironmentState extends EnvironmentState{
 	public void setRemainingZombies(int remainingZombies) {
 		this.remainingZombies = remainingZombies;
 	}
+	
+	public int getZombiesAlive() {
+		return zombiesAlive;
+	}
+
+	public void setZombiesAlive(int zombiesAlive) {
+		this.zombiesAlive = zombiesAlive;
+	}
+	
+	public void calculateZombiesAlive() {
+		this.zombiesAlive = this.zombies.stream().filter(z -> z.getPosition() != null).collect(Collectors.toList()).size();
+	}
 
 	public boolean getHouseAttacked() {
 		return houseAttacked;
@@ -269,5 +269,6 @@ public class PvzEnvironmentState extends EnvironmentState{
 
 	public void decreaseRemainingZombies() {
 		this.remainingZombies--;
+		this.zombiesAlive--;
 	}
 }

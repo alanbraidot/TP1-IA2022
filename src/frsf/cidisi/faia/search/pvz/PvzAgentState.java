@@ -10,15 +10,17 @@ public class PvzAgentState extends SearchBasedAgentState {
 
     private int[] position;
     private int suns;
-    private int zombies;
+    private int zombies; //Represents the total number of zombies that will be part of the game
+    private int zombiesAlive; //Represents the number of zombies that are currently alive
     private int[][] garden;
 
 
-    public PvzAgentState(int row, int col, int suns, int zombies, int[][] g){
+    public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive){
         this.garden = g;
         this.position = new int[] {row, col};
         this.suns = suns;
         this.zombies = zombies;
+        this.zombiesAlive = zombiesAlive;
     }
 
     public PvzAgentState(){
@@ -50,6 +52,7 @@ public class PvzAgentState extends SearchBasedAgentState {
         int[] positionObj = ((PvzAgentState) obj).getPosition();
         int sunsObj = ((PvzAgentState) obj).getSuns();
         int zombiesObj = ((PvzAgentState) obj).getZombies();
+        int zombiesAliveObj = ((PvzAgentState) obj).getZombiesAlive();
 
         for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
             for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
@@ -63,7 +66,7 @@ public class PvzAgentState extends SearchBasedAgentState {
             return false;
         }
         
-        if (suns!=sunsObj || zombies!=zombiesObj) {
+        if (suns!=sunsObj || zombies!=zombiesObj || zombiesAlive!=zombiesAliveObj) {
         	return false;
         }
         
@@ -85,8 +88,9 @@ public class PvzAgentState extends SearchBasedAgentState {
         newPosition[1] = position[1];
         int newSuns = suns;
         int newZombies = zombies;
+        int newZombiesAlive = zombiesAlive;
 
-        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden);
+        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive);
 
         return newState;
     }
@@ -117,6 +121,8 @@ public class PvzAgentState extends SearchBasedAgentState {
 		for(int i=0; i<perception.getLeftSensor().size(); i++) {
 			garden[row][col-i] = perception.getLeftSensor().get(i);
 		}
+		
+		this.setZombiesAlive(perception.getZombiesAlive());
 	}
 
 	public int[] getPosition() {
@@ -143,6 +149,14 @@ public class PvzAgentState extends SearchBasedAgentState {
 		this.zombies = zombies;
 	}
 
+	public int getZombiesAlive() {
+		return zombiesAlive;
+	}
+
+	public void setZombiesAlive(int zombiesAlive) {
+		this.zombiesAlive = zombiesAlive;
+	}
+
 	public int[][] getGarden() {
 		return garden;
 	}
@@ -157,7 +171,8 @@ public class PvzAgentState extends SearchBasedAgentState {
 		
 		str = str + " Position=\"(" + getRowPosition() + "," + "" + getColumnPosition() + ")\"\n";
 		str = str + " Suns=\"" + suns + "\"\n";
-		str = str + " Zombies=\"" + zombies + "\"\n";
+		str = str + " RemainingZombies=\"" + zombies + "\"\n";
+		str = str + " ZombiesAlive=\"" + zombiesAlive + "\"\n";
 		str = str + " Garden= \n";
 		
         for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
@@ -185,7 +200,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 	}
 
 	public boolean isNoMoreZombies() {
-		return this.zombies==0;
+		return this.zombiesAlive==0;
 	}
 	
 	public boolean isZombie(int perception) {
@@ -218,6 +233,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	public void decreaseZombies() {
 		this.zombies--;
+		this.zombiesAlive--;
 	}
     
 }
