@@ -153,8 +153,31 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		String str = "";
+		
+		str = str + " Position=\"(" + getRowPosition() + "," + "" + getColumnPosition() + ")\"\n";
+		str = str + " Suns=\"" + suns + "\"\n";
+		str = str + " Zombies=\"" + zombies + "\"\n";
+		str = str + " Garden= \n";
+		
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            str = str + "[";
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
+            	if (garden[row][col] == PvzPerception.UNKNOWN_PERCEPTION) {
+                    str = str + "? ";
+                }
+            	else {
+                	if (garden[row][col] == PvzPerception.EMPTY_PERCEPTION) {
+                		 str = str + "* ";
+                	}
+                	else
+                		str = str + garden[row][col] + " "; 
+                }
+            }
+            str = str + "]\n";
+        }
+		
+		return str;
 	}
 
 	public boolean isAgentAlive() {

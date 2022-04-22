@@ -8,7 +8,7 @@ import frsf.cidisi.faia.state.EnvironmentState;
 public class PvzEnvironmentState extends EnvironmentState{
 	
 	public static int MATRIX_ROW_LENGTH = 5;
-	public static int MATRIX_COLUMN_LENGTH = 10;
+	public static int MATRIX_COLUMN_LENGTH = 10; //Column 0 is used to represent the house.
 	
 	private int[][] garden;
     private int[] agentPosition; //Represents the current position of the agent
@@ -61,9 +61,27 @@ public class PvzEnvironmentState extends EnvironmentState{
     
     @Override
     public String toString() {
-        String str = "";
-
-        return str;
+		String str = "";
+		
+		str = str + " AgentPosition=\"(" + getAgentPosition()[0] + "," + "" + getAgentPosition()[1] + ")\"\n";
+		str = str + " AgentSuns=\"" + agentSuns + "\"\n";
+		str = str + " RemainingZombies=\"" + remainingZombies + "\"\n";
+		str = str + " HouseAttacked=\"" + houseAttacked + "\"\n";
+		str = str + " Garden= \n";
+		
+        for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            str = str + "[";
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
+            	if (garden[row][col] == PvzPerception.EMPTY_PERCEPTION) {
+                	str = str + "* ";
+                }
+                else
+                	str = str + garden[row][col] + " "; 
+            }
+            str = str + "]\n";
+        }
+		
+		return str;
     }
     
 	
