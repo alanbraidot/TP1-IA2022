@@ -21,12 +21,11 @@ public class FightDown extends SearchAction{
 		 * in the below position. Otherwise return 'null'. */
 		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
 			
-			//Absolute value is applied since in the matrix the zombies appear with negative numbers
-			int perception = Math.abs(pvzState.getGardenPosition(row+1, col)); 
+			int perception = pvzState.getGardenPosition(row+1, col); 
 			
-			if(pvzState.isZombie(perception) && pvzState.getSuns() > perception){
+			if(pvzState.isZombie(perception) && pvzState.getSuns() > Math.abs(perception)){
 				
-				pvzState.setSuns(pvzState.getSuns() - perception);
+				pvzState.setSuns(pvzState.getSuns() - Math.abs(perception));
 				pvzState.setGardenPosition(row+1, col, PvzPerception.EMPTY_PERCEPTION);
 				pvzState.decreaseZombies();
 				
@@ -52,12 +51,11 @@ public class FightDown extends SearchAction{
 		
 		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
 			
-			//Absolute value is applied since in the matrix the zombies appear with negative numbers
-			int perception = Math.abs(environmentState.getGardenPosition(row+1, col));
+			int perception = environmentState.getGardenPosition(row+1, col);
 			
-			if(environmentState.isZombie(perception) && environmentState.getAgentSuns() > perception){
+			if(environmentState.isZombie(perception) && environmentState.getAgentSuns() > Math.abs(perception)){
 				
-				environmentState.setAgentSuns(environmentState.getAgentSuns() - perception);
+				environmentState.setAgentSuns(environmentState.getAgentSuns() - Math.abs(perception));
 				environmentState.setGardenPosition(row+1, col, PvzPerception.EMPTY_PERCEPTION);
 				environmentState.decreaseRemainingZombies();
 				environmentState.killZombie(row+1, col);

@@ -19,8 +19,8 @@ public class Sunflower {
 		this.suns = suns;
 	}
 	
-	public void increaseSuns(int suns) {
-		this.suns += suns;
+	public void increaseSuns(int s) {
+		this.suns = this.suns + s;
 	}
 
 	public int[] getPosition() {

@@ -97,7 +97,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return topColumn; // if I'm on the first row and I want to perceive the environment towards the north I won't see a damn thing, thus I will return an Empty arraylist
 		}
 		
-        for (int i=row; i>=0; i--) {   //I perceive the environment on a column northwards until I hit the garden top wall
+        for (int i=(row-1); i>=0; i--) {   //I perceive the environment on a column northwards until I hit the garden top wall
         	
         	topColumn.add(garden[i][col]); //I add to my return array each element I see
         	
@@ -116,11 +116,16 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return rightRow; 
 		}
 		
-        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
+        for (int i = (col+1); i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
    
         	rightRow.add(garden[row][i]);
         	
         	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
+        		
+        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
+        			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
+        		}
+        		
         		return rightRow;
         	}
         }
@@ -135,7 +140,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return leftRow; 
 		}
 		
-	    for (int i = col; i>0; i--) { 
+	    for (int i = (col-1); i>0; i--) { 
 	
 	    	leftRow.add(garden[row][i]);
 	    	
@@ -156,7 +161,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return bottomColumn; 
 		}
 		
-        for (int i = row; i<PvzEnvironmentState.MATRIX_ROW_LENGTH; i++) { 
+        for (int i = (row+1); i<PvzEnvironmentState.MATRIX_ROW_LENGTH; i++) { 
    
         	bottomColumn.add(garden[i][col]);
         	

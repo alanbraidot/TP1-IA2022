@@ -20,11 +20,12 @@ public class FightUp extends SearchAction{
 		/* The 'FightUp' action can be selected only if there is an zombie
 		 * in the above position. Otherwise return 'null'. */
 		if(row > 0) {
+			
 			int perception = pvzState.getGardenPosition(row-1, col);
 			
-			if(pvzState.isZombie(perception) && pvzState.getSuns() > perception){
+			if(pvzState.isZombie(perception) && pvzState.getSuns() > Math.abs(perception)){
 				
-				pvzState.setSuns(pvzState.getSuns() - perception);
+				pvzState.setSuns(pvzState.getSuns() - Math.abs(perception));
 				pvzState.setGardenPosition(row-1, col, PvzPerception.EMPTY_PERCEPTION);
 				pvzState.decreaseZombies();
 				
@@ -49,11 +50,12 @@ public class FightUp extends SearchAction{
 		int col = environmentState.getAgentPosition()[1];
 		
 		if(row > 0) {
+			
 			int perception = environmentState.getGardenPosition(row-1, col);
 			
-			if(environmentState.isZombie(perception) && environmentState.getAgentSuns() > perception){
+			if(environmentState.isZombie(perception) && environmentState.getAgentSuns() > Math.abs(perception)){
 				
-				environmentState.setAgentSuns(environmentState.getAgentSuns() - perception);
+				environmentState.setAgentSuns(environmentState.getAgentSuns() - Math.abs(perception));
 				environmentState.setGardenPosition(row-1, col, PvzPerception.EMPTY_PERCEPTION);
 				environmentState.decreaseRemainingZombies();
 				environmentState.killZombie(row-1, col);

@@ -139,7 +139,7 @@ public class PvzEnvironment extends Environment{
         boolean houseAttacked = pvzEnvironmentState.getHouseAttacked();
 
        
-        // If the agent has no suns, he failed
+        //The agent fails if he has no suns or a zombie arrives at the house
         if (agentSuns < 1 || houseAttacked)
             return true;
 

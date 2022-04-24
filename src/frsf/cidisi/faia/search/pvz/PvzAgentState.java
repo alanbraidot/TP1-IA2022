@@ -104,25 +104,37 @@ public class PvzAgentState extends SearchBasedAgentState {
 		
 		//The garden is updated upwards.
 		for(int i=0; i<perception.getTopSensor().size(); i++) {
-			garden[row-i][col] = perception.getTopSensor().get(i);
+			garden[row-i-1][col] = perception.getTopSensor().get(i);
 		}
 		
 		//The garden is updated downwards.
 		for(int i=0; i<perception.getBottomSensor().size(); i++) {
-			garden[row+i][col] = perception.getBottomSensor().get(i);
+			garden[row+i+1][col] = perception.getBottomSensor().get(i);
 		}
 		
 		//The garden is updated to the right.
 		for(int i=0; i<perception.getRightSensor().size(); i++) {
-			garden[row][col+i] = perception.getRightSensor().get(i);
+			garden[row][col+i+1] = perception.getRightSensor().get(i);
 		}
 		
 		//The garden is updated to the left.
 		for(int i=0; i<perception.getLeftSensor().size(); i++) {
-			garden[row][col-i] = perception.getLeftSensor().get(i);
+			garden[row][col-i-1] = perception.getLeftSensor().get(i);
 		}
 		
-		this.setZombiesAlive(perception.getZombiesAlive());
+		//this.setZombiesAlive(perception.getZombiesAlive());
+		this.zombiesAlive = this.calculateZombiesAlive();
+	}
+	
+	public int calculateZombiesAlive() {
+		int zombieAliveAux = 0;
+		for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
+                if(isZombie(garden[row][col]))
+                	zombieAliveAux++;
+            }
+        }
+		return zombieAliveAux;
 	}
 
 	public int[] getPosition() {
