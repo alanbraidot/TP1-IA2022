@@ -112,6 +112,14 @@ public class PvzAgentState extends SearchBasedAgentState {
 			garden[row+i+1][col] = perception.getBottomSensor().get(i);
 		}
 		
+		//It is verified that a zombie has not advanced to the agent's position. If you have done so, you must perform the updates.
+		if(isZombie(perception.getRightSensor().get(0))) {
+			this.setSuns(this.getSuns() + (perception.getRightSensor().get(0)*2));
+			this.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
+			this.decreaseZombies();
+		}
+		perception.getRightSensor().remove(0);
+		
 		//The garden is updated to the right.
 		for(int i=0; i<perception.getRightSensor().size(); i++) {
 			garden[row][col+i+1] = perception.getRightSensor().get(i);
@@ -190,16 +198,26 @@ public class PvzAgentState extends SearchBasedAgentState {
         for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
             str = str + "[";
             for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
-            	if (garden[row][col] == PvzPerception.UNKNOWN_PERCEPTION) {
-                    str = str + "? ";
-                }
-            	else {
-                	if (garden[row][col] == PvzPerception.EMPTY_PERCEPTION) {
-                		 str = str + "* ";
-                	}
-                	else
-                		str = str + garden[row][col] + " "; 
-                }
+            	if(row == getRowPosition() && col == getColumnPosition()) {
+            		str = str + " § "; 
+            	}
+            	else{
+            		if (garden[row][col] == PvzPerception.UNKNOWN_PERCEPTION) {
+            			str = str + " ? ";
+	                }
+	            	else {
+	                	if (garden[row][col] == PvzPerception.EMPTY_PERCEPTION) {
+	                		 str = str + " * ";
+	                	}
+	                	else {
+	                		if(garden[row][col] >= PvzPerception.SUNFLOWER_PERCEPTION && garden[row][col] < 10) {
+	                			str = str + " " + garden[row][col] + " ";
+	                		}
+	                		else
+	                			str = str + garden[row][col] + " ";
+	                	}
+	                }
+            	}
             }
             str = str + "]\n";
         }

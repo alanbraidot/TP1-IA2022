@@ -46,7 +46,14 @@ public class PvzEnvironment extends Environment{
         perception.setLeftSensor(this.getLeftRow(row, col));
         perception.setRightSensor(this.getRightRow(row, col));
         perception.setBottomSensor(this.getBottomColumn(row, col));
-        perception.setZombiesAlive(this.getEnvironmentState().getZombiesAlive());
+        
+        //It is verified that a zombie has not advanced to the agent's position. If you have done so, you must perform the updates.
+        if(environmentState.isZombie(perception.getRightSensor().get(0))) {
+			environmentState.setAgentSuns(environmentState.getAgentSuns() + (perception.getRightSensor().get(0)*2));
+			environmentState.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
+			environmentState.decreaseRemainingZombies();
+			environmentState.killZombie(row, col);
+		}
 
         // Return the perception
         return perception;
@@ -65,15 +72,17 @@ public class PvzEnvironment extends Environment{
     	for(Zombie z : environmentState.getZombies()) {
 
 			//It is verified that the zombie does not exist and there are free rows
-			if(z.getPosition() == null && freeRows.size()>0){
+			if(z.getPosition() == null){
 				
-				//Randomizing appear
-				if((new Random().nextInt(10 + 0) + 0) < 2){ //20% chance to appear
-					
-					int[] position = new int[] {freeRows.get(0), PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1};
-					z.setPosition(position); //The new position is assigned
-					environmentState.setGardenPosition(z.getRowPosition(), z.getColumnPosition(), z.getType()); //The matrix is updated
-					freeRows.remove(0); //The row is deleted as free
+				if(freeRows.size()>0) {
+					//Randomizing appear
+					if((new Random().nextInt(10 + 0) + 0) < 1){ //20% chance to appear
+						
+						int[] position = new int[] {freeRows.get(0), PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1};
+						z.setPosition(position); //The new position is assigned
+						environmentState.setGardenPosition(z.getRowPosition(), z.getColumnPosition(), z.getType()); //The matrix is updated
+						freeRows.remove(0); //The row is deleted as free
+					}
 				}
 			}
 			else {
@@ -85,8 +94,8 @@ public class PvzEnvironment extends Environment{
 				if(!environmentState.isZombie(nextColumnState)) {
 					
 					//TODO Uncomment.
-					//if(z.getLastMovement() >= 3 || new Random().nextInt(10 + 0) < 2) {
-					if(z.getLastMovement() >= 3 || true) { //The zombie must advance
+					if(z.getLastMovement() >= 3 || new Random().nextInt(10 + 0) < 2) { //The zombie must advance
+					//if(z.getLastMovement() >= 3 || true) { //The zombie must advance
 						
 						z.decreaseColumn(); //The zombie advances a column.
 						

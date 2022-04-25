@@ -77,10 +77,15 @@ public class PvzEnvironmentState extends EnvironmentState{
             str = str + "[";
             for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
             	if (garden[row][col] == PvzPerception.EMPTY_PERCEPTION) {
-                	str = str + "* ";
+                	str = str + " * ";
                 }
-                else
-                	str = str + garden[row][col] + " "; 
+            	else {
+            		if(garden[row][col] >= PvzPerception.SUNFLOWER_PERCEPTION && garden[row][col] < 10) {
+            			str = str + " " + garden[row][col] + " ";
+            		}
+            		else
+            			str = str + garden[row][col] + " ";
+            	}
             }
             str = str + "]\n";
         }
@@ -116,7 +121,7 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return rightRow; 
 		}
 		
-        for (int i = (col+1); i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
+        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
    
         	rightRow.add(garden[row][i]);
         	
@@ -180,7 +185,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     }
     
     public void killZombie(int row, int col) {
-    	this.zombies.removeIf(z -> z.getColumnPosition()==col && z.getRowPosition()==row);
+    	this.zombies.removeIf(z -> z.getPosition()!=null && z.getColumnPosition()==col && z.getRowPosition()==row);
     	this.garden[row][col] = PvzPerception.EMPTY_PERCEPTION;
     }
 	

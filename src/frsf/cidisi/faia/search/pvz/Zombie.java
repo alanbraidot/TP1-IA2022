@@ -1,5 +1,7 @@
 package frsf.cidisi.faia.search.pvz;
 
+import java.util.Random;
+
 public class Zombie {
 	
 	private int type; //Represents the type of zombie
@@ -8,7 +10,8 @@ public class Zombie {
 	
 	public Zombie() {
 		super();
-		this.type = PvzPerception.ZOMBIE_TYPE1_PERCEPTION; //TODO Randomizing
+		//TODO Uncomment this.type = randomizingType();
+		this.type = PvzPerception.ZOMBIE_TYPE1_PERCEPTION;
 		this.lastMovement = 0;
 		this.position = null;
 	}
@@ -59,6 +62,19 @@ public class Zombie {
 	
 	public void decreaseColumn() {
 		this.position[1]--;
+	}
+	
+	private int randomizingType() {
+		int type = new Random().nextInt((6 + 1) + 1);
+		switch (type) {
+			case 1: type=PvzPerception.ZOMBIE_TYPE1_PERCEPTION;break;
+			case 2: type=PvzPerception.ZOMBIE_TYPE2_PERCEPTION;break;
+			case 3: type=PvzPerception.ZOMBIE_TYPE3_PERCEPTION;break;
+			case 4: type=PvzPerception.ZOMBIE_TYPE4_PERCEPTION;break;
+			case 5: type=PvzPerception.ZOMBIE_TYPE5_PERCEPTION;break;
+			case 6: type=PvzPerception.ZOMBIE_TYPE6_PERCEPTION;break;
+		}
+		return type;
 	}
 
 }

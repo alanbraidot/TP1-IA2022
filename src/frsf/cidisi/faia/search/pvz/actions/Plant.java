@@ -43,6 +43,7 @@ public class Plant extends SearchAction{
 		int col = environmentState.getAgentPosition()[1];
 		
 		if(environmentState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION && environmentState.getAgentSuns() > 1) {
+			environmentState.plantSunflower();
 			environmentState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
 			pvzState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
 			
