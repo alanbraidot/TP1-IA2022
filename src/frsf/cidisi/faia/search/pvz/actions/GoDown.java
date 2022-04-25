@@ -69,7 +69,8 @@ public class GoDown extends SearchAction{
 			//If there is a sunflower in the new cell, the suns generated are added to the agent and the sunflower is restarted
 			if(newPerception > PvzPerception.SUNFLOWER_PERCEPTION) {
 				environmentState.setAgentSuns(environmentState.getAgentSuns() + newPerception);
-				environmentState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
+				pvzState.setSuns(environmentState.getAgentSuns());
+				environmentState.harvestSunflower(row, col);
 			}
 			
 			//If a zombie exists in the new cell, the number of suns on the plant is decreased by twice the zombie's life and the zombie dies.

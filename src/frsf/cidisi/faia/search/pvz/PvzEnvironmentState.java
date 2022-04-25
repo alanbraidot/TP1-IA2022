@@ -31,7 +31,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         this.agentSuns = 15;
         
         //TODO Uncomment this.remainginZombies = new Random().nextInt(20 + 5) + 5)
-        this.remainingZombies = 10;
+        this.remainingZombies = 5;
     	this.zombiesAlive = 0;
     	
     	// Randomly generate the zombies
@@ -45,6 +45,10 @@ public class PvzEnvironmentState extends EnvironmentState{
                 garden[row][col] = PvzPerception.EMPTY_PERCEPTION; //Fill the array as unknown.
             }
         }
+        
+        // 
+    	zombies.get(0).setPosition(new int[]{2,9});
+    	garden[2][9] = zombies.get(0).getType();
 
         this.setAgentPosition(new int[]{2, 1});
     }
@@ -121,13 +125,15 @@ public class PvzEnvironmentState extends EnvironmentState{
 			return rightRow; 
 		}
 		
-        for (int i = col; i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
+		rightRow.add(garden[row][col]);
+		
+        for (int i = (col+1); i<PvzEnvironmentState.MATRIX_COLUMN_LENGTH; i++) { 
    
         	rightRow.add(garden[row][i]);
         	
         	if(garden[row][i] != PvzPerception.EMPTY_PERCEPTION) { 
         		
-        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
+        		while(rightRow.size()<(PvzEnvironmentState.MATRIX_COLUMN_LENGTH-col)) {  //as im perceiving to the right, the length of what I'm returning will have to be 8 which is the maximum size according to the garden length - current row position
         			rightRow.add(PvzPerception.UNKNOWN_PERCEPTION);
         		}
         		
@@ -280,5 +286,10 @@ public class PvzEnvironmentState extends EnvironmentState{
 	public void decreaseRemainingZombies() {
 		this.remainingZombies--;
 		this.zombiesAlive--;
+	}
+
+	public void harvestSunflower(int row, int col) {
+		this.sunflowers.stream().filter(s -> s.getColumnPosition() == col && s.getRowPosition() == row).collect(Collectors.toList()).get(0).setSuns(0);
+		garden[row][col] = PvzPerception.SUNFLOWER_PERCEPTION; 
 	}
 }

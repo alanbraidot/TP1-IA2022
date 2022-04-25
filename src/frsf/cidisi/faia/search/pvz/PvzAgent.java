@@ -19,6 +19,7 @@ import frsf.cidisi.faia.search.pvz.actions.GoRight;
 import frsf.cidisi.faia.search.pvz.actions.GoUp;
 import frsf.cidisi.faia.search.pvz.actions.Harvest;
 import frsf.cidisi.faia.search.pvz.actions.Plant;
+import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.DepthFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
 
@@ -68,9 +69,9 @@ public class PvzAgent extends SearchBasedAgent{
 	@Override
 	public Action selectAction() {
 		// Create the search strategy
-        DepthFirstSearch strategy = new DepthFirstSearch();
+        //DepthFirstSearch strategy = new DepthFirstSearch();
         
-        //BreathFirstSearch strategy = new BreathFirstSearch();
+        BreathFirstSearch strategy = new BreathFirstSearch();
 
         /**
          * Another search strategy examples:
