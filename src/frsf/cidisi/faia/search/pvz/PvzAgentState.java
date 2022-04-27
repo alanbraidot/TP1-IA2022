@@ -180,6 +180,8 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public int[][] getGarden() {
 		return garden;
 	}
+	
+	
 
 	public void setGarden(int[][] garden) {
 		this.garden = garden;
@@ -232,6 +234,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public boolean isNoMoreZombies() {
 		return this.zombiesAlive==0;
 	}
+	
 	
 	public boolean isZombie(int perception) {
 		return (perception>=PvzPerception.ZOMBIE_TYPE3_PERCEPTION && perception<=PvzPerception.ZOMBIE_TYPE1_PERCEPTION);

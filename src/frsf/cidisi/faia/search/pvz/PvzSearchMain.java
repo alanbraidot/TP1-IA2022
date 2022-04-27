@@ -14,7 +14,7 @@ public class PvzSearchMain {
 										pvzEnvironment.getEnvironmentState().getRemainingZombies(),
 										pvzEnvironment.getEnvironmentState().getZombiesAlive());
 		
-		SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(pvzEnvironment, pvzAgent);
+		PvzSearchBasedAgentSimulator simulator = new PvzSearchBasedAgentSimulator(pvzEnvironment, pvzAgent);
 		simulator.start();
 	}
 }
