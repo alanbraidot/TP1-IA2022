@@ -29,10 +29,10 @@ public class PvzSearchBasedAgentSimulator extends PvzGoalBasedAgentSimulator {
         // POR AHORA EL FRAMEWORK ES MONOAGENTE :)
         SearchBasedAgent sa = (SearchBasedAgent) getAgents().firstElement();
         Problem p = sa.getProblem();
-        GoalTest gt = p.getGoalState();
-        AgentState aSt = p.getAgentState();
+        //GoalTest gt = p.getGoalState();
+        PvzAgentState aSt = (PvzAgentState) p.getAgentState();
 
-        return gt.isGoalState(aSt);
+        return (aSt.getSuns()<=0);
     }
 
     @Override

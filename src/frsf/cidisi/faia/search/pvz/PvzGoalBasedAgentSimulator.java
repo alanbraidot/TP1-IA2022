@@ -1,6 +1,5 @@
 package frsf.cidisi.faia.search.pvz;
 
-
 import java.util.Vector;
 
 import frsf.cidisi.faia.agent.GoalBasedAgent;
@@ -8,6 +7,7 @@ import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.search.pvz.actions.GoRight;
 import frsf.cidisi.faia.simulator.Simulator;
 import frsf.cidisi.faia.simulator.events.EventType;
 import frsf.cidisi.faia.simulator.events.SimulatorEventNotifier;
@@ -47,7 +47,8 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
         PvzEnvironmentState state = (PvzEnvironmentState) environment.getEnvironmentState();
 
         agent = (PvzAgent) this.getAgents().firstElement();
-
+        
+        PvzAgentState pvzAgentState = (PvzAgentState) agent.getAgentState();
        
         /*
          * Simulation starts. The environment sends perceptions to the agent, and
@@ -80,10 +81,11 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
 
             this.actionReturned(agent, action);
 
-        } while (!this.agentSucceeded(action) && !this.agentFailed(action) && (state.isNoRemainingZombies()));
+            //TODO Acomodar
+        } while (pvzAgentState.getSuns()>0 && (state.isRemainingZombies()));
 
         // Check what happened, if agent has reached the goal or not.
-        if (this.agentSucceeded(action) && (state.isNoRemainingZombies())) {
+        if (pvzAgentState.getSuns()>0 && !(state.isRemainingZombies())) {
             System.out.println("Agent has reached the goal!");
         } else {
             System.out.println("ERROR: The simulation has finished, but the agent has not reached his goal.");

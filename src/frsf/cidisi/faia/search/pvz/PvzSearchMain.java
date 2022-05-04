@@ -1,7 +1,6 @@
 package frsf.cidisi.faia.search.pvz;
 
 import frsf.cidisi.faia.exceptions.PrologConnectorException;
-import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 
 public class PvzSearchMain {
     

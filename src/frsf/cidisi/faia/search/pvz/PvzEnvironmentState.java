@@ -263,8 +263,8 @@ public class PvzEnvironmentState extends EnvironmentState{
 		return sunflowers;
 	}
 	
-	public boolean isNoRemainingZombies() { //GoalTest for game finishing
-		return this.remainingZombies==0;
+	public boolean isRemainingZombies() { //GoalTest for game finishing
+		return this.remainingZombies>0;
 	}
 
 	public void setSunflowers(ArrayList<Sunflower> sunflowers) {
