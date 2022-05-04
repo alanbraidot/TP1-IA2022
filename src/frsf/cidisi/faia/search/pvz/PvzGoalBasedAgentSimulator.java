@@ -7,7 +7,10 @@ import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.search.pvz.actions.GoDown;
+import frsf.cidisi.faia.search.pvz.actions.GoLeft;
 import frsf.cidisi.faia.search.pvz.actions.GoRight;
+import frsf.cidisi.faia.search.pvz.actions.GoUp;
 import frsf.cidisi.faia.simulator.Simulator;
 import frsf.cidisi.faia.simulator.events.EventType;
 import frsf.cidisi.faia.simulator.events.SimulatorEventNotifier;
@@ -72,7 +75,11 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             action = agent.selectAction();
 
             if (action == null) {
-                break;
+                if (pvzAgentState.getPosition()[0]==4) {
+                    action = new GoUp();
+                }else {
+                    action = new GoDown();
+                }
             }
             
             
@@ -82,7 +89,7 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             this.actionReturned(agent, action);
 
             //TODO Acomodar
-        } while (pvzAgentState.getSuns()>0 && (state.isRemainingZombies()));
+        } while (agentSucceeded(action) && !agentFailed(action) && (state.isRemainingZombies()));
 
         // Check what happened, if agent has reached the goal or not.
         if (pvzAgentState.getSuns()>0 && !(state.isRemainingZombies())) {

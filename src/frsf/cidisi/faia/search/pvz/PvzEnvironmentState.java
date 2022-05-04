@@ -31,7 +31,7 @@ public class PvzEnvironmentState extends EnvironmentState{
         this.agentSuns = 15;
         
         //TODO Uncomment this.remainginZombies = new Random().nextInt(20 + 5) + 5)
-        this.remainingZombies = 5;
+        this.remainingZombies = 10;
     	this.zombiesAlive = 0;
     	
     	// Randomly generate the zombies
@@ -45,10 +45,6 @@ public class PvzEnvironmentState extends EnvironmentState{
                 garden[row][col] = PvzPerception.EMPTY_PERCEPTION; //Fill the array as unknown.
             }
         }
-        
-        // 
-    	zombies.get(0).setPosition(new int[]{2,9});
-    	garden[2][9] = zombies.get(0).getType();
 
         this.setAgentPosition(new int[]{2, 1});
     }

@@ -48,7 +48,7 @@ public class PvzEnvironment extends Environment{
         perception.setBottomSensor(this.getBottomColumn(row, col));
         
         //It is verified that a zombie has not advanced to the agent's position. If you have done so, you must perform the updates.
-        if(environmentState.isZombie(perception.getRightSensor().get(0))) {
+        if(perception.getRightSensor().size()>0 && environmentState.isZombie(perception.getRightSensor().get(0))) {
 			environmentState.setAgentSuns(environmentState.getAgentSuns() + (perception.getRightSensor().get(0)*2));
 			environmentState.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
 			environmentState.decreaseRemainingZombies();

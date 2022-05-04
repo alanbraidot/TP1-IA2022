@@ -10,8 +10,9 @@ public class Zombie {
 	
 	public Zombie() {
 		super();
-		//TODO Uncomment this.type = randomizingType();
-		this.type = PvzPerception.ZOMBIE_TYPE1_PERCEPTION;
+		//TODO Uncomment
+		this.type = randomizingType();
+		//this.type = PvzPerception.ZOMBIE_TYPE1_PERCEPTION;
 		this.lastMovement = 0;
 		this.position = null;
 	}
@@ -65,7 +66,7 @@ public class Zombie {
 	}
 	
 	private int randomizingType() {
-		int type = new Random().nextInt((6 + 1) + 1);
+		 int type = new Random().nextInt(6) + 1;
 		switch (type) {
 			case 1: type=PvzPerception.ZOMBIE_TYPE1_PERCEPTION;break;
 			case 2: type=PvzPerception.ZOMBIE_TYPE2_PERCEPTION;break;

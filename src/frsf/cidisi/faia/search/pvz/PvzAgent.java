@@ -72,9 +72,9 @@ public class PvzAgent extends SearchBasedAgent{
 	@Override
 	public Action selectAction() {
 		// Create the search strategy
-        //DepthFirstSearch strategy = new DepthFirstSearch();
+        DepthFirstSearch strategy = new DepthFirstSearch();
         
-        BreathFirstSearch strategy = new BreathFirstSearch();
+        //BreathFirstSearch strategy = new BreathFirstSearch();
 
         /**
          * Another search strategy examples:
