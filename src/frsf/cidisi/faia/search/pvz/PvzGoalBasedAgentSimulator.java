@@ -11,6 +11,7 @@ import frsf.cidisi.faia.search.pvz.actions.GoDown;
 import frsf.cidisi.faia.search.pvz.actions.GoLeft;
 import frsf.cidisi.faia.search.pvz.actions.GoRight;
 import frsf.cidisi.faia.search.pvz.actions.GoUp;
+import frsf.cidisi.faia.search.pvz.actions.Plant;
 import frsf.cidisi.faia.simulator.Simulator;
 import frsf.cidisi.faia.simulator.events.EventType;
 import frsf.cidisi.faia.simulator.events.SimulatorEventNotifier;
@@ -74,12 +75,22 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             System.out.println("Asking the agent for an action...");
             action = agent.selectAction();
 
+            
+            //TODO Corregir
             if (action == null) {
-                if (pvzAgentState.getPosition()[0]==4) {
-                    action = new GoUp();
-                }else {
-                    action = new GoDown();
-                }
+            	if(pvzAgentState.getPosition()[0]==3
+            			&& (pvzAgentState.getGardenPosition(pvzAgentState.getRowPosition(),
+            					pvzAgentState.getColumnPosition())
+            						== PvzPerception.EMPTY_PERCEPTION)) {
+            		
+            			action = new Plant();
+            	}
+            	else {
+            		if (pvzAgentState.getPosition()[0]==4)
+                        action = new GoUp();
+                    else
+                        action = new GoDown();
+            	}
             }
             
             

@@ -41,6 +41,7 @@ public class PvzAgent extends SearchBasedAgent{
         pvzState.setSuns(agentSuns);
         pvzState.setZombies(remainingZombies);
         pvzState.setZombiesAlive(zombiesAlive);
+        pvzState.setZombiesInitial(remainingZombies);
         
         this.setAgentState(pvzState);
 

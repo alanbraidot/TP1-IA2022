@@ -7,8 +7,10 @@ public class PvzAgentGoal extends GoalTest{
 
 	@Override
 	public boolean isGoalState(AgentState agentState) {
-		if(((PvzAgentState) agentState).isNoMoreAliveZombies() &&
-			((PvzAgentState) agentState).isAgentAlive()){
+		if((((PvzAgentState) agentState).isNoMoreAliveZombies()
+			&& ((PvzAgentState) agentState).isAgentAlive())
+			
+			|| ((PvzAgentState) agentState).hasNotEnoughSuns()){
 			return true;
 		}
 		return false;

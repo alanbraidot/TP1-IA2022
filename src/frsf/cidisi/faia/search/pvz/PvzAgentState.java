@@ -13,14 +13,16 @@ public class PvzAgentState extends SearchBasedAgentState {
     private int zombies; //Represents the total number of zombies that will be part of the game
     private int zombiesAlive; //Represents the number of zombies that are currently alive
     private int[][] garden;
+    private int zombiesInitial; 
 
 
-    public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive){
+    public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial){
         this.garden = g;
         this.position = new int[] {row, col};
         this.suns = suns;
         this.zombies = zombies;
         this.zombiesAlive = zombiesAlive;
+        this.zombiesInitial = zombiesInitial;
     }
 
     public PvzAgentState(){
@@ -89,8 +91,9 @@ public class PvzAgentState extends SearchBasedAgentState {
         int newSuns = suns;
         int newZombies = zombies;
         int newZombiesAlive = zombiesAlive;
+        int newZombiesInitial = zombiesInitial;
 
-        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive);
+        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive, zombiesInitial);
 
         return newState;
     }
@@ -105,15 +108,33 @@ public class PvzAgentState extends SearchBasedAgentState {
 		//The garden is updated upwards.
 		for(int i=0; i<perception.getTopSensor().size(); i++) {
 			garden[row-i-1][col] = perception.getTopSensor().get(i);
+			
+			//If a zombie was sensed, all columns to the right are set to unknown
+			if(isZombie(perception.getTopSensor().get(i))){
+				int colAux = col+1;
+				while(colAux < PvzEnvironmentState.MATRIX_COLUMN_LENGTH) {
+					this.setGardenPosition(row-i-1, colAux, PvzPerception.UNKNOWN_PERCEPTION);
+					colAux++;
+				}
+			}
 		}
 		
 		//The garden is updated downwards.
 		for(int i=0; i<perception.getBottomSensor().size(); i++) {
 			garden[row+i+1][col] = perception.getBottomSensor().get(i);
+			
+			//If a zombie was sensed, all columns to the right are set to unknown
+			if(isZombie(perception.getBottomSensor().get(i))){
+				int colAux = col+1;
+				while(colAux < PvzEnvironmentState.MATRIX_COLUMN_LENGTH) {
+					this.setGardenPosition(row+i+1, colAux, PvzPerception.UNKNOWN_PERCEPTION);
+					colAux++;
+				}
+			}
 		}
 		
 		//It is verified that a zombie has not advanced to the agent's position. If you have done so, you must perform the updates.
-		if(isZombie(perception.getRightSensor().get(0))) {
+		if(perception.getRightSensor().size()>0 && isZombie(perception.getRightSensor().get(0))) {
 			this.setSuns(this.getSuns() + (perception.getRightSensor().get(0)*2));
 			this.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
 			this.decreaseZombies();
@@ -263,10 +284,33 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public int getGardenPosition(int row, int col) {
 		return this.garden[row][col];
 	}
+	
+	public int getZombiesInitial() {
+		return zombiesInitial;
+	}
+
+	public void setZombiesInitial(int zombiesInitial) {
+		this.zombiesInitial = zombiesInitial;
+	}
 
 	public void decreaseZombies() {
 		this.zombies--;
 		this.zombiesAlive--;
+	}
+
+	public boolean hasNotEnoughSuns() {
+		int zombieLife = 0;
+		for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
+            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
+                if(isZombie(garden[row][col]))
+                	zombieLife += Math.abs(garden[row][col]);
+            }
+        }
+		return (this.suns <= zombieLife);
+	}
+
+	public boolean isOneLessZombies() {
+		return this.zombies == (this.zombiesInitial-1) ;
 	}
     
 }

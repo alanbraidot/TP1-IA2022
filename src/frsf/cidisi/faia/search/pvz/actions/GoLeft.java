@@ -75,6 +75,7 @@ public class GoLeft extends SearchAction{
 			//If a zombie exists in the new cell, the number of suns on the plant is decreased by twice the zombie's life and the zombie dies.
 			if(environmentState.isZombie(newPerception)) {
 				environmentState.setAgentSuns(environmentState.getAgentSuns() + (newPerception*2)); //The operator + is used since the life of the zombie is represented with negative numbers
+				pvzState.setSuns(environmentState.getAgentSuns());
 				environmentState.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
 				environmentState.decreaseRemainingZombies();
 				environmentState.killZombie(row, col);
