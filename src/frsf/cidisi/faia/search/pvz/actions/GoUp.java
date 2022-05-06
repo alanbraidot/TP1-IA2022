@@ -47,7 +47,7 @@ public class GoUp extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 0.0;
+		return 100000.0;
 	}
 
 	@Override
@@ -62,6 +62,7 @@ public class GoUp extends SearchAction{
 			row = row - 1;
 			pvzState.setRowPosition(row);
 			environmentState.setAgentPosition(new int[] {row, col});
+			pvzState.setGoingUp(true);
 			
 			int newPerception = environmentState.getGardenPosition(row, col); //The state of the cell to which the agent was moved is stored.
 			

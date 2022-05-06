@@ -14,15 +14,19 @@ public class PvzAgentState extends SearchBasedAgentState {
     private int zombiesAlive; //Represents the number of zombies that are currently alive
     private int[][] garden;
     private int zombiesInitial; 
+    private boolean isGoingUp;
 
 
-    public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial){
+   
+
+	public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial){
         this.garden = g;
         this.position = new int[] {row, col};
         this.suns = suns;
         this.zombies = zombies;
         this.zombiesAlive = zombiesAlive;
         this.zombiesInitial = zombiesInitial;
+        this.isGoingUp=false;
     }
 
     public PvzAgentState(){
@@ -207,6 +211,15 @@ public class PvzAgentState extends SearchBasedAgentState {
 	public void setGarden(int[][] garden) {
 		this.garden = garden;
 	}
+	
+	
+	public boolean isGoingUp() {
+		return isGoingUp;
+	}
+
+	public void setGoingUp(boolean isGoingUp) {
+		this.isGoingUp = isGoingUp;
+	}
 
 	@Override
 	public String toString() {
@@ -309,6 +322,9 @@ public class PvzAgentState extends SearchBasedAgentState {
 		return (this.suns <= zombieLife);
 	}
 
+	
+	
+	//ESTAMOS USANDO ESTO??
 	public boolean isOneLessZombies() {
 		return this.zombies == (this.zombiesInitial-1) ;
 	}

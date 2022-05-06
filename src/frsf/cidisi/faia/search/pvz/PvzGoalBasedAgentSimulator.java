@@ -86,10 +86,15 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             			action = new Plant();
             	}
             	else {
-            		if (pvzAgentState.getPosition()[0]==4)
+            		if (pvzAgentState.isGoingUp()==true && pvzAgentState.getPosition()[0]!=0)
                         action = new GoUp();
                     else
-                        action = new GoDown();
+                    	if (pvzAgentState.getPosition()[0]!=4) {
+                    		action = new GoDown();
+                    	} else {
+                    		action = new GoUp();
+                    	}
+                    	
             	}
             }
             

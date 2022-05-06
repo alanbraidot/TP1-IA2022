@@ -19,8 +19,12 @@ import frsf.cidisi.faia.search.pvz.actions.GoRight;
 import frsf.cidisi.faia.search.pvz.actions.GoUp;
 import frsf.cidisi.faia.search.pvz.actions.Harvest;
 import frsf.cidisi.faia.search.pvz.actions.Plant;
+import frsf.cidisi.faia.solver.search.AStarSearch;
 import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.DepthFirstSearch;
+import frsf.cidisi.faia.solver.search.GreedySearch;
+import frsf.cidisi.faia.solver.search.IEstimatedCostFunction;
+import frsf.cidisi.faia.solver.search.IStepCostFunction;
 import frsf.cidisi.faia.solver.search.Search;
 
 public class PvzAgent extends SearchBasedAgent{
@@ -72,8 +76,13 @@ public class PvzAgent extends SearchBasedAgent{
 
 	@Override
 	public Action selectAction() {
+		
+
+		IStepCostFunction cost = new CostFunction();
+        IEstimatedCostFunction heuristic = new Heuristic();
+        AStarSearch strategy = new AStarSearch(cost, heuristic);
 		// Create the search strategy
-        DepthFirstSearch strategy = new DepthFirstSearch();
+        //DepthFirstSearch strategy = new DepthFirstSearch();
         
         //BreathFirstSearch strategy = new BreathFirstSearch();
 
