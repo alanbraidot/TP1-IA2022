@@ -19,14 +19,14 @@ public class PvzAgentState extends SearchBasedAgentState {
 
    
 
-	public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial){
+	public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial, boolean isGoingUp){
         this.garden = g;
         this.position = new int[] {row, col};
         this.suns = suns;
         this.zombies = zombies;
         this.zombiesAlive = zombiesAlive;
         this.zombiesInitial = zombiesInitial;
-        this.isGoingUp=false;
+        this.isGoingUp=isGoingUp;
     }
 
     public PvzAgentState(){
@@ -59,6 +59,10 @@ public class PvzAgentState extends SearchBasedAgentState {
         int sunsObj = ((PvzAgentState) obj).getSuns();
         int zombiesObj = ((PvzAgentState) obj).getZombies();
         int zombiesAliveObj = ((PvzAgentState) obj).getZombiesAlive();
+        boolean goingUpObj = ((PvzAgentState) obj).isGoingUp();
+        int zombiesinitialObj = ((PvzAgentState) obj).getZombiesInitial();
+        
+        
 
         for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
             for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
@@ -73,6 +77,10 @@ public class PvzAgentState extends SearchBasedAgentState {
         }
         
         if (suns!=sunsObj || zombies!=zombiesObj || zombiesAlive!=zombiesAliveObj) {
+        	return false;
+        }
+        
+        if (isGoingUp!=goingUpObj || zombiesInitial!=zombiesinitialObj) {
         	return false;
         }
         
@@ -96,8 +104,9 @@ public class PvzAgentState extends SearchBasedAgentState {
         int newZombies = zombies;
         int newZombiesAlive = zombiesAlive;
         int newZombiesInitial = zombiesInitial;
+        boolean newIsGoingUp = isGoingUp;
 
-        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive, zombiesInitial);
+        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive, newZombiesInitial, newIsGoingUp);
 
         return newState;
     }
@@ -323,10 +332,5 @@ public class PvzAgentState extends SearchBasedAgentState {
 	}
 
 	
-	
-	//ESTAMOS USANDO ESTO??
-	public boolean isOneLessZombies() {
-		return this.zombies == (this.zombiesInitial-1) ;
-	}
     
 }

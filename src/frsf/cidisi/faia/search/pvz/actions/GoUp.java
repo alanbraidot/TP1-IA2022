@@ -47,7 +47,7 @@ public class GoUp extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 100000.0;
+		return 100.0;
 	}
 
 	@Override

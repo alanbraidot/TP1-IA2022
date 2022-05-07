@@ -78,9 +78,9 @@ public class PvzAgent extends SearchBasedAgent{
 	public Action selectAction() {
 		
 
-		IStepCostFunction cost = new CostFunction();
+		
         IEstimatedCostFunction heuristic = new Heuristic();
-        AStarSearch strategy = new AStarSearch(cost, heuristic);
+        GreedySearch strategy = new GreedySearch(heuristic);
 		// Create the search strategy
         //DepthFirstSearch strategy = new DepthFirstSearch();
         
