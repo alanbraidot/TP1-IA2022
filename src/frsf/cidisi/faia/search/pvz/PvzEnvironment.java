@@ -94,9 +94,7 @@ public class PvzEnvironment extends Environment{
 				
 				if(!environmentState.isZombie(nextColumnState)) {
 					
-					//TODO Uncomment.
-					if(z.getLastMovement() >= 3 || new Random().nextInt(10 + 0) < 2) { //The zombie must advance
-					//if(z.getLastMovement() >= 3 || true) { //The zombie must advance
+					if(z.getLastMovement() >= 3 || new Random().nextInt(10) < 2) { //The zombie must advance
 						
 						z.decreaseColumn(); //The zombie advances a column.
 						
