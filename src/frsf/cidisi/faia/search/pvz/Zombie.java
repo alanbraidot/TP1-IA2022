@@ -10,9 +10,7 @@ public class Zombie {
 	
 	public Zombie() {
 		super();
-		//TODO Uncomment
 		this.type = randomizingType();
-		//this.type = PvzPerception.ZOMBIE_TYPE1_PERCEPTION;
 		this.lastMovement = 0;
 		this.position = null;
 	}

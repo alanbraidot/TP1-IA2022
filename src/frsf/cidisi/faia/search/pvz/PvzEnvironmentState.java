@@ -27,10 +27,10 @@ public class PvzEnvironmentState extends EnvironmentState{
 	@Override
     public void initState() {
     	
-		//TODO Uncomment this.agentSuns = new Random().nextInt(20 + 2) + 2)
+		//TODO Uncomment this.agentSuns = new Random().nextInt(20 - 2) + 2)
         this.agentSuns = 20;
         
-        //TODO Uncomment this.remainginZombies = new Random().nextInt(20 + 5) + 5)
+        //TODO Uncomment this.remainginZombies = new Random().nextInt(20 - 5) + 5)
         this.remainingZombies = 5;
     	this.zombiesAlive = 0;
     	

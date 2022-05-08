@@ -51,11 +51,11 @@ public class PvzAgent extends SearchBasedAgent{
 
         //Create the operators
         Vector<SearchAction> operators = new Vector<SearchAction>();
-        operators.addElement(new Plant());
         operators.addElement(new FightUp());
         operators.addElement(new FightDown());
         operators.addElement(new FightLeft());
         operators.addElement(new FightRight());
+        operators.addElement(new Plant());
         operators.addElement(new GoLeft());
         operators.addElement(new GoUp());
         operators.addElement(new GoRight());

@@ -1,0 +1,34 @@
+\documentclass[a0,landscale]{a0poster}
+\usepackage{mathptmx}
+\usepackage{qtree}
+\usepackage{nodo}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\title{Ã�rbol de ejecuciÃ³n - EjecuciÃ³n Nro: 15 - Estrategia: Greedy (Avara)}
+\author{}
+\begin{document}
+\maketitle
+\begin{figure}[!h]
+\Tree [.\nodo{0}{0.0}{-} \nodo{1}{122.0}{GoLeft} \nodo{2}{122.0}{GoUp} \nodo{3}{124.0}{GoRight} \nodo{4}{122.0}{GoDown} ]
+\Tree [.\nodo{1}{122.0}{GoLeft} \nodo{5}{173.0}{FightRight} \nodo{6}{244.0}{Plant} \nodo{7}{244.0}{GoLeft} \nodo{8}{244.0}{GoUp} \nodo{9}{174.0}{GoRight} \nodo{10}{244.0}{GoDown} ]
+\Tree [.\nodo{2}{122.0}{GoUp} \nodo{11}{174.0}{FightDown} \nodo{12}{244.0}{Plant} \nodo{13}{244.0}{GoLeft} \nodo{14}{246.0}{GoRight} \nodo{15}{174.0}{GoDown} ]
+\Tree [.\nodo{3}{124.0}{GoRight} \nodo{22}{177.0}{FightLeft} \nodo{23}{248.0}{Plant} \nodo{24}{176.0}{GoLeft} \nodo{25}{248.0}{GoUp} \nodo{26}{250.0}{GoRight} \nodo{27}{248.0}{GoDown} ]
+\end{figure}
+\begin{figure}[!h]
+\Tree [.\nodo{4}{122.0}{GoDown} \nodo{16}{174.0}{FightUp} \nodo{17}{244.0}{Plant} \nodo{18}{244.0}{GoLeft} \nodo{19}{174.0}{GoUp} \nodo{20}{246.0}{GoRight} \nodo{21}{244.0}{GoDown} ]
+\Tree [.\nodo{5}{173.0}{FightRight} \nodo{28}{224.0}{Plant} \nodo{29}{223.0}{GoLeft} \nodo{30}{224.0}{GoUp} \nodo{31}{225.0}{GoRight} \nodo{32}{224.0}{GoDown} ]
+\Tree [.\nodo{9}{174.0}{GoRight} \nodo{33}{226.0}{Plant} \nodo{34}{225.0}{GoLeft} \nodo{35}{226.0}{GoUp} \nodo{36}{227.0}{GoRight} \nodo{37}{226.0}{GoDown} ]
+\Tree [.\nodo{29}{223.0}{GoLeft} \nodo{67}{223.0}{FightUp} \nodo{68}{273.0}{Plant} \nodo{69}{274.0}{GoLeft} \nodo{70}{223.0}{GoUp} \nodo{71}{273.0}{GoDown} ]
+\end{figure}
+\begin{figure}[!h]
+\Tree [.\nodo{11}{174.0}{FightDown} \nodo{38}{226.0}{Plant} \nodo{39}{225.0}{GoLeft} \nodo{40}{227.0}{GoRight} \nodo{41}{226.0}{GoDown} ]
+\Tree [.\nodo{15}{174.0}{GoDown} \nodo{42}{226.0}{Plant} \nodo{43}{225.0}{GoLeft} \nodo{44}{226.0}{GoUp} \nodo{45}{227.0}{GoRight} \nodo{46}{226.0}{GoDown} ]
+\Tree [.\nodo{22}{177.0}{FightLeft} \nodo{62}{230.0}{Plant} \nodo{63}{229.0}{GoLeft} \nodo{64}{230.0}{GoUp} \nodo{65}{231.0}{GoRight} \nodo{66}{230.0}{GoDown} ]
+\Tree [.\nodo{24}{176.0}{GoLeft} \nodo{57}{228.0}{Plant} \nodo{58}{227.0}{GoLeft} \nodo{59}{228.0}{GoUp} \nodo{60}{229.0}{GoRight} \nodo{61}{228.0}{GoDown} ]
+\end{figure}
+\begin{figure}[!h]
+\Tree [.\nodo{16}{174.0}{FightUp} \nodo{47}{226.0}{Plant} \nodo{48}{225.0}{GoLeft} \nodo{49}{226.0}{GoUp} \nodo{50}{227.0}{GoRight} \nodo{51}{226.0}{GoDown} ]
+\Tree [.\nodo{19}{174.0}{GoUp} \nodo{52}{226.0}{Plant} \nodo{53}{225.0}{GoLeft} \nodo{54}{226.0}{GoUp} \nodo{55}{227.0}{GoRight} \nodo{56}{226.0}{GoDown} ]
+\end{figure}
+
+\end{document}

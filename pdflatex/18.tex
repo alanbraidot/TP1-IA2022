@@ -1,0 +1,23 @@
+\documentclass[a0,landscale]{a0poster}
+\usepackage{mathptmx}
+\usepackage{qtree}
+\usepackage{nodo}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\title{Ã�rbol de ejecuciÃ³n - EjecuciÃ³n Nro: 18 - Estrategia: Greedy (Avara)}
+\author{}
+\begin{document}
+\maketitle
+\begin{figure}[!h]
+\Tree [.\nodo{0}{0.0}{-} \nodo{1}{72.0}{FightLeft} \nodo{2}{113.0}{Plant} \nodo{3}{73.0}{GoLeft} \nodo{4}{113.0}{GoRight} \nodo{5}{113.0}{GoDown} ]
+\Tree [.\nodo{1}{72.0}{FightLeft} \nodo{6}{144.0}{Plant} \nodo{7}{145.0}{GoLeft} \nodo{8}{143.0}{GoRight} \nodo{9}{144.0}{GoDown} ]
+\Tree [.\nodo{2}{113.0}{Plant} \nodo{14}{185.0}{FightLeft} \nodo{15}{186.0}{GoLeft} \nodo{16}{226.0}{GoRight} \nodo{17}{226.0}{GoDown} ]
+\Tree [.\nodo{3}{73.0}{GoLeft} \nodo{10}{146.0}{Plant} \nodo{11}{147.0}{GoLeft} \nodo{12}{145.0}{GoRight} \nodo{13}{146.0}{GoDown} ]
+\end{figure}
+\begin{figure}[!h]
+\Tree [.\nodo{4}{113.0}{GoRight} \nodo{18}{155.0}{FightRight} \nodo{19}{226.0}{Plant} \nodo{20}{156.0}{GoRight} \nodo{21}{226.0}{GoDown} ]
+\Tree [.\nodo{5}{113.0}{GoDown} \nodo{22}{226.0}{Plant} \nodo{23}{226.0}{GoLeft} \nodo{24}{226.0}{GoRight} \nodo{25}{226.0}{GoDown} ]
+\Tree [.\nodo{8}{143.0}{GoRight} \nodo{26}{143.0}{FightRight} \nodo{27}{214.0}{Plant} \nodo{28}{143.0}{GoRight} \nodo{29}{214.0}{GoDown} ]
+\end{figure}
+
+\end{document}

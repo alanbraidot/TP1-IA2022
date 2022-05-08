@@ -147,12 +147,14 @@ public class PvzAgentState extends SearchBasedAgentState {
 		}
 		
 		//It is verified that a zombie has not advanced to the agent's position. If you have done so, you must perform the updates.
-		if(perception.getRightSensor().size()>0 && isZombie(perception.getRightSensor().get(0))) {
-			this.setSuns(this.getSuns() + (perception.getRightSensor().get(0)*2));
-			this.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
-			this.decreaseZombies();
+		if(perception.getRightSensor().size()>0) {
+			if(isZombie(perception.getRightSensor().get(0))) {
+				this.setSuns(this.getSuns() + (perception.getRightSensor().get(0)*2));
+				this.setGardenPosition(row, col, PvzPerception.EMPTY_PERCEPTION);
+				this.decreaseZombies();
+			}
+			perception.getRightSensor().remove(0);
 		}
-		perception.getRightSensor().remove(0);
 		
 		//The garden is updated to the right.
 		for(int i=0; i<perception.getRightSensor().size(); i++) {
@@ -331,6 +333,9 @@ public class PvzAgentState extends SearchBasedAgentState {
 		return (this.suns <= zombieLife);
 	}
 
+	public int getDistance(int rowAgent, int colAgent, int rowZombie, int colZombie) {
+		return (Math.abs(colAgent-colZombie) + Math.abs(rowAgent-rowAgent));
+	}
 	
     
 }

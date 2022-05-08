@@ -78,23 +78,26 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             
             //TODO Corregir
             if (action == null) {
-            	if(pvzAgentState.getPosition()[0]==3
+            	if(pvzAgentState.getColumnPosition()==1
             			&& (pvzAgentState.getGardenPosition(pvzAgentState.getRowPosition(),
-            					pvzAgentState.getColumnPosition())
-            						== PvzPerception.EMPTY_PERCEPTION)) {
+            					pvzAgentState.getColumnPosition()) == PvzPerception.EMPTY_PERCEPTION)) {
             		
             			action = new Plant();
             	}
             	else {
-            		if (pvzAgentState.isGoingUp()==true && pvzAgentState.getPosition()[0]!=0)
-                        action = new GoUp();
-                    else
-                    	if (pvzAgentState.getPosition()[0]!=PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
-                    		action = new GoDown();
-                    	} else {
-                    		action = new GoUp();
-                    	}
-                    	
+            		//If it is far from the house and there are no zombies, the agent returns to the house.
+            		if(pvzAgentState.getColumnPosition()>1)
+            			action = new GoLeft();
+            		else {
+	            		if (pvzAgentState.isGoingUp()==true && pvzAgentState.getRowPosition()!=0)
+	                        action = new GoUp();
+	                    else {
+	                    	if (pvzAgentState.getRowPosition()!=PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
+	                    		action = new GoDown();
+	                    	} else
+	                    		action = new GoUp();
+	                    }
+            		}  	
             	}
             }
             
