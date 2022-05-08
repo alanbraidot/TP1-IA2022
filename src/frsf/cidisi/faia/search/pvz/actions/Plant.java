@@ -31,7 +31,7 @@ public class Plant extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 1.0;
+		return 60.0;
 	}
 
 	@Override

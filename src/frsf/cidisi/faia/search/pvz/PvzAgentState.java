@@ -166,14 +166,13 @@ public class PvzAgentState extends SearchBasedAgentState {
 			garden[row][col-i-1] = perception.getLeftSensor().get(i);
 		}
 		
-		//this.setZombiesAlive(perception.getZombiesAlive());
 		this.zombiesAlive = this.calculateZombiesAlive();
 	}
 	
 	public int calculateZombiesAlive() {
 		int zombieAliveAux = 0;
 		for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
-            for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
+            for (int col = 1; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
                 if(isZombie(garden[row][col]))
                 	zombieAliveAux++;
             }
@@ -334,7 +333,7 @@ public class PvzAgentState extends SearchBasedAgentState {
 	}
 
 	public int getDistance(int rowAgent, int colAgent, int rowZombie, int colZombie) {
-		return (Math.abs(colAgent-colZombie) + Math.abs(rowAgent-rowAgent));
+		return (Math.abs(colZombie-colAgent) + Math.abs(rowZombie-rowAgent));
 	}
 	
     

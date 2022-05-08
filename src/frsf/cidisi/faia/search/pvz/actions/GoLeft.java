@@ -47,7 +47,7 @@ public class GoLeft extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 1.0;
+		return 50.0;
 	}
 
 	@Override

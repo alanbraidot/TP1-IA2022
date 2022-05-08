@@ -17,7 +17,7 @@ public class GoUp extends SearchAction{
 		int col = pvzState.getColumnPosition();
 		int row = pvzState.getRowPosition();
 		
-		if(row > 0) {
+		if(row > 0 && !pvzState.isZombie(pvzState.getGardenPosition(row-1, col))) {
 			row = row - 1;
 			pvzState.setRowPosition(row);
 			
@@ -47,7 +47,7 @@ public class GoUp extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 100.0;
+		return 50.0;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class GoUp extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(row > 0) {
+		if(row > 0 && !pvzState.isZombie(pvzState.getGardenPosition(row-1, col))) {
 			row = row - 1;
 			pvzState.setRowPosition(row);
 			environmentState.setAgentPosition(new int[] {row, col});

@@ -75,12 +75,11 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             System.out.println("Asking the agent for an action...");
             action = agent.selectAction();
 
-            
-            //TODO Corregir
             if (action == null) {
             	if(pvzAgentState.getColumnPosition()==1
             			&& (pvzAgentState.getGardenPosition(pvzAgentState.getRowPosition(),
-            					pvzAgentState.getColumnPosition()) == PvzPerception.EMPTY_PERCEPTION)) {
+            					pvzAgentState.getColumnPosition()) == PvzPerception.EMPTY_PERCEPTION)
+            						&& (pvzAgentState.getSuns()>1)) {
             		
             			action = new Plant();
             	}
@@ -101,17 +100,15 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             	}
             }
             
-            
             System.out.println("Action returned: " + action);
             System.out.println();
 
             this.actionReturned(agent, action);
 
-            //TODO Acomodar
         } while (agentSucceeded(action) && !agentFailed(action) && (state.isRemainingZombies()));
 
         // Check what happened, if agent has reached the goal or not.
-        if (pvzAgentState.getSuns()>0 && !(state.isRemainingZombies())) {
+        if (agentSucceeded(action) && !(state.isRemainingZombies())) {
             System.out.println("Agent has reached the goal!");
         } else {
             System.out.println("ERROR: The simulation has finished, but the agent has not reached his goal.");

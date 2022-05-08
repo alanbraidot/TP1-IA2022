@@ -17,7 +17,7 @@ public class GoDown extends SearchAction{
 		int col = pvzState.getColumnPosition();
 		int row = pvzState.getRowPosition();
 		
-		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1 && !pvzState.isZombie(pvzState.getGardenPosition(row+1, col))) {
 			row = row + 1;
 			pvzState.setRowPosition(row);
 			
@@ -27,7 +27,6 @@ public class GoDown extends SearchAction{
 			if(newPerception > PvzPerception.SUNFLOWER_PERCEPTION) {
 				pvzState.setSuns(pvzState.getSuns() + newPerception);
 				pvzState.setGardenPosition(row, col, PvzPerception.SUNFLOWER_PERCEPTION);
-				pvzState.decreaseZombies();
 			}
 			
 			//If a zombie exists in the new cell, the number of suns on the plant is decreased by twice the zombie's life and the zombie dies.
@@ -48,7 +47,7 @@ public class GoDown extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 100.0;
+		return 50.0;
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class GoDown extends SearchAction{
 		int col = environmentState.getAgentPosition()[1];
 	
 		
-		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
+		if(row < PvzEnvironmentState.MATRIX_ROW_LENGTH-1 && !pvzState.isZombie(pvzState.getGardenPosition(row+1, col))) {
 			row = row + 1;
 			pvzState.setRowPosition(row);
 			pvzState.setGoingUp(false);

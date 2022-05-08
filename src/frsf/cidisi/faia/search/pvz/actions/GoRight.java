@@ -17,7 +17,7 @@ public class GoRight extends SearchAction{
 		int row = pvzState.getRowPosition();
 		int col = pvzState.getColumnPosition();
 		
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1 && !pvzState.isZombie(pvzState.getGardenPosition(row, col+1))) {
 			col = col + 1;
 			pvzState.setColumnPosition(col);
 			
@@ -47,7 +47,7 @@ public class GoRight extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 5.0;
+		return 50.0;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class GoRight extends SearchAction{
 		int row = environmentState.getAgentPosition()[0];
 		int col = environmentState.getAgentPosition()[1];
 		
-		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1) {
+		if(col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1 && !pvzState.isZombie(pvzState.getGardenPosition(row, col+1))) {
 			col = col + 1;
 			pvzState.setColumnPosition(col);
 			environmentState.setAgentPosition(new int[] {row, col});

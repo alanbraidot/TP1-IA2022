@@ -38,7 +38,7 @@ public class FightDown extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		return 0.0;
+		return 5.0;
 	}
 
 	@Override
