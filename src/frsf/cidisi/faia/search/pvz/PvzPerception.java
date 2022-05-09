@@ -22,7 +22,6 @@ public class PvzPerception extends Perception{
     private ArrayList<Integer> topSensor;
     private ArrayList<Integer> rightSensor;
     private ArrayList<Integer> bottomSensor;
-    private int zombiesAlive;
     
     public PvzPerception() {
     }
@@ -48,7 +47,6 @@ public class PvzPerception extends Perception{
         this.setLeftSensor(pvzEnvironment.getLeftRow(row, col));
         this.setRightSensor(pvzEnvironment.getRightRow(row, col));
         this.setBottomSensor(pvzEnvironment.getBottomColumn(row, col));
-        this.zombiesAlive = environmentState.getZombiesAlive();
     }
 
 
@@ -84,18 +82,15 @@ public class PvzPerception extends Perception{
 		this.bottomSensor = bottomSensor;
 	}
 
-	public int getZombiesAlive() {
-		return zombiesAlive;
-	}
-
-	public void setZombiesAlive(int zombiesAlive) {
-		this.zombiesAlive = zombiesAlive;
-	}
-
 	@Override
 	public String toString() {
-		return "PvzPerception [leftSensor=" + leftSensor + ", topSensor=" + topSensor + ", rightSensor=" + rightSensor
-				+ ", bottomSensor=" + bottomSensor + ", zombiesAlive=" + zombiesAlive + "]";
+		String str = "";
+		str = str + "\n" + " LeftSensor=" + leftSensor + "\n";
+		str = str +	" TopSensor=" + topSensor + "\n";
+		str = str +	" RightSensor=" + rightSensor + "\n";
+		str = str +	" BottomSensor=" + bottomSensor;
+		
+		return str;
 	}
 	
 }

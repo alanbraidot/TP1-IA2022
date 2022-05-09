@@ -76,7 +76,7 @@ public class PvzEnvironment extends Environment{
 				
 				if(freeRows.size()>0) {
 					//Randomizing appear
-					if(new Random().nextInt(100) < 10){ //10% chance to appear
+					if(new Random().nextInt(100) < 10){ //5% chance to appear
 						int row = new Random().nextInt(freeRows.size()); //The cell in which the zombie will appear is randomized
 						int[] position = new int[] {freeRows.get(row), PvzEnvironmentState.MATRIX_COLUMN_LENGTH-1};
 						z.setPosition(position); //The new position is assigned

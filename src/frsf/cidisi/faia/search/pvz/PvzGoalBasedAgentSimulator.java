@@ -76,22 +76,25 @@ public abstract class PvzGoalBasedAgentSimulator extends Simulator {
             action = agent.selectAction();
 
             if (action == null) {
+            	int row = pvzAgentState.getRowPosition();
+            	int col = pvzAgentState.getColumnPosition();
             	if(pvzAgentState.getColumnPosition()==1
-            			&& (pvzAgentState.getGardenPosition(pvzAgentState.getRowPosition(),
-            					pvzAgentState.getColumnPosition()) == PvzPerception.EMPTY_PERCEPTION)
-            						&& (pvzAgentState.getSuns()>1)) {
+            			&& (pvzAgentState.getGardenPosition(row, col) == PvzPerception.EMPTY_PERCEPTION)
+            			&& (pvzAgentState.getSuns()>1)) {
             		
-            			action = new Plant();
+            				action = new Plant();
             	}
             	else {
             		//If it is far from the house and there are no zombies, the agent returns to the house.
             		if(pvzAgentState.getColumnPosition()>1)
             			action = new GoLeft();
             		else {
-	            		if (pvzAgentState.isGoingUp()==true && pvzAgentState.getRowPosition()!=0)
-	                        action = new GoUp();
+	            		if (pvzAgentState.isGoingUp()==true && pvzAgentState.getRowPosition()!=0
+	            				&& !pvzAgentState.isZombie(pvzAgentState.getGardenPosition(row-1, col)))
+	                        		action = new GoUp();
 	                    else {
-	                    	if (pvzAgentState.getRowPosition()!=PvzEnvironmentState.MATRIX_ROW_LENGTH-1) {
+	                    	if (pvzAgentState.getRowPosition()!=PvzEnvironmentState.MATRIX_ROW_LENGTH-1
+	                    			&& !pvzAgentState.isZombie(pvzAgentState.getGardenPosition(row+1, col))) {
 	                    		action = new GoDown();
 	                    	} else
 	                    		action = new GoUp();

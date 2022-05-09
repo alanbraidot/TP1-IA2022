@@ -28,7 +28,7 @@ public class PvzEnvironmentState extends EnvironmentState{
     public void initState() {
     	
 		this.agentSuns = new Random().nextInt(20 - 2) + 2;
-        this.remainingZombies = new Random().nextInt(20 - 5) + 5;
+        this.remainingZombies = new Random().nextInt(15 - 5) + 5;
     	this.zombiesAlive = 0;
     	
     	// Randomly generate the zombies

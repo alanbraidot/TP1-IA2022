@@ -13,19 +13,17 @@ public class PvzAgentState extends SearchBasedAgentState {
     private int zombies; //Represents the total number of zombies that will be part of the game
     private int zombiesAlive; //Represents the number of zombies that are currently alive
     private int[][] garden;
-    private int zombiesInitial; 
     private boolean isGoingUp;
 
 
    
 
-	public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, int zombiesInitial, boolean isGoingUp){
+	public PvzAgentState(int row, int col, int suns, int zombies, int[][] g, int zombiesAlive, boolean isGoingUp){
         this.garden = g;
         this.position = new int[] {row, col};
         this.suns = suns;
         this.zombies = zombies;
         this.zombiesAlive = zombiesAlive;
-        this.zombiesInitial = zombiesInitial;
         this.isGoingUp=isGoingUp;
     }
 
@@ -60,9 +58,6 @@ public class PvzAgentState extends SearchBasedAgentState {
         int zombiesObj = ((PvzAgentState) obj).getZombies();
         int zombiesAliveObj = ((PvzAgentState) obj).getZombiesAlive();
         boolean goingUpObj = ((PvzAgentState) obj).isGoingUp();
-        int zombiesinitialObj = ((PvzAgentState) obj).getZombiesInitial();
-        
-        
 
         for (int row = 0; row < PvzEnvironmentState.MATRIX_ROW_LENGTH; row++) {
             for (int col = 0; col < PvzEnvironmentState.MATRIX_COLUMN_LENGTH; col++) {
@@ -80,7 +75,7 @@ public class PvzAgentState extends SearchBasedAgentState {
         	return false;
         }
         
-        if (isGoingUp!=goingUpObj || zombiesInitial!=zombiesinitialObj) {
+        if (isGoingUp!=goingUpObj) {
         	return false;
         }
         
@@ -103,10 +98,9 @@ public class PvzAgentState extends SearchBasedAgentState {
         int newSuns = suns;
         int newZombies = zombies;
         int newZombiesAlive = zombiesAlive;
-        int newZombiesInitial = zombiesInitial;
         boolean newIsGoingUp = isGoingUp;
 
-        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive, newZombiesInitial, newIsGoingUp);
+        PvzAgentState newState = new PvzAgentState(newPosition[0], newPosition[1], newSuns, newZombies, newGarden, newZombiesAlive, newIsGoingUp);
 
         return newState;
     }
@@ -306,14 +300,6 @@ public class PvzAgentState extends SearchBasedAgentState {
 
 	public int getGardenPosition(int row, int col) {
 		return this.garden[row][col];
-	}
-	
-	public int getZombiesInitial() {
-		return zombiesInitial;
-	}
-
-	public void setZombiesInitial(int zombiesInitial) {
-		this.zombiesInitial = zombiesInitial;
 	}
 
 	public void decreaseZombies() {

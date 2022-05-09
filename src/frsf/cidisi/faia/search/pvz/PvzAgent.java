@@ -45,7 +45,6 @@ public class PvzAgent extends SearchBasedAgent{
         pvzState.setSuns(agentSuns);
         pvzState.setZombies(remainingZombies);
         pvzState.setZombiesAlive(zombiesAlive);
-        pvzState.setZombiesInitial(remainingZombies);
         
         this.setAgentState(pvzState);
 
@@ -77,19 +76,24 @@ public class PvzAgent extends SearchBasedAgent{
 	@Override
 	public Action selectAction() {
 		
-        //IStepCostFunction costFunction = new CostFunction();
-        //UniformCostSearch strategy = new UniformCostSearch(costFunction);
+        //Depth First Search:
+		//DepthFirstSearch strategy = new DepthFirstSearch();
 		
+		//Breath First Search:
+		//BreathFirstSearch strategy = new BreathFirstSearch();
+
+        //Uniform Cost:
+        /*IStepCostFunction costFunction = new CostFunction();
+        UniformCostSearch strategy = new UniformCostSearch(costFunction);*/
+
+        //A Star Search:
         IStepCostFunction cost = new CostFunction();
         IEstimatedCostFunction heuristic = new Heuristic();
         AStarSearch strategy = new AStarSearch(cost, heuristic);
-		
-        //IEstimatedCostFunction heuristic = new Heuristic();
-        //GreedySearch strategy = new GreedySearch(heuristic);
-		// Create the search strategy
-        //DepthFirstSearch strategy = new DepthFirstSearch();
         
-        //BreathFirstSearch strategy = new BreathFirstSearch();
+        //Greedy Search:
+        /*IEstimatedCostFunction heuristic = new Heuristic();
+        GreedySearch strategy = new GreedySearch(heuristic);*/
 
         /**
          * Another search strategy examples:
