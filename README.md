@@ -1,7 +1,5 @@
 # TRABAJO PRÁCTICO 1 2022
-# INTELIGENCIA ARTIFICIAL
+INTELIGENCIA ARTIFICIAL
+GRUPO 9
 
-#GRUPO 9
-#Braidot, Alan.
-#Filippa, Dino.
-#Pagliaruzza, Manuel.
+INTEGRANTES: Braidot, Alan - Filippa, Dino - Pagliaruzza, Manuel.
